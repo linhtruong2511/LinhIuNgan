@@ -1,6 +1,7 @@
 import ParticlesBg from "@/components/ParticlesBg";
 import MusicPlayer from "@/components/MusicPlayer";
 import IntroSplash from "@/components/IntroSplash";
+import SweetWords from "@/components/SweetWords";
 
 export default function Home() {
   return (
@@ -8,10 +9,9 @@ export default function Home() {
       <ParticlesBg />
       <MusicPlayer />
       <IntroSplash />
+      <SweetWords />
       {/* Placeholder for remaining sections */}
-      <div className="h-screen bg-ocean-blue flex items-center justify-center">
-        <p className="text-white/30 text-xl">More sections coming...</p>
-      </div>
+      <div className="h-screen bg-deep-night" />
     </main>
   );
 }
