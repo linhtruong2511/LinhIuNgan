@@ -1,0 +1,56 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Great+Vibes&family=Inter:wght@300;400;500;600&display=swap");
+
+@layer base {
+  html {
+    scroll-behavior: auto; /* GSAP handles smooth scroll */
+  }
+
+  body {
+    @apply bg-deep-night text-white overflow-x-hidden;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Hide scrollbar for cleaner look */
+  body::-webkit-scrollbar {
+    display: none;
+  }
+  body {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+@layer utilities {
+  .text-glow {
+    text-shadow: 0 0 20px rgba(78, 205, 196, 0.5),
+      0 0 40px rgba(78, 205, 196, 0.3);
+  }
+
+  .text-glow-warm {
+    text-shadow: 0 0 20px rgba(230, 57, 70, 0.5),
+      0 0 40px rgba(255, 107, 107, 0.3);
+  }
+
+  .golden-glow {
+    box-shadow: 0 0 30px rgba(255, 217, 61, 0.4),
+      0 0 60px rgba(255, 217, 61, 0.2);
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.8s ease-out forwards;
+  }
+
+  /* Envelope flap 3D rotation helper */
+  .rotate-x-180 {
+    transform: rotateX(180deg);
+  }
+}
