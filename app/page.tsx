@@ -1,14 +1,17 @@
 import ParticlesBg from "@/components/ParticlesBg";
 import MusicPlayer from "@/components/MusicPlayer";
+import IntroSplash from "@/components/IntroSplash";
 
 export default function Home() {
   return (
-    <main className="min-h-screen flex items-center justify-center bg-deep-night relative">
+    <main className="relative">
       <ParticlesBg />
       <MusicPlayer />
-      <h1 className="text-4xl font-dancing text-teal-accent text-glow z-10 relative">
-        Happy Birthday ❤️
-      </h1>
+      <IntroSplash />
+      {/* Placeholder for remaining sections */}
+      <div className="h-screen bg-ocean-blue flex items-center justify-center">
+        <p className="text-white/30 text-xl">More sections coming...</p>
+      </div>
     </main>
   );
 }
