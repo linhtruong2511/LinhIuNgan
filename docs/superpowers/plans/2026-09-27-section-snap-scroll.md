@@ -38,7 +38,7 @@
   }
   ```
 
-- [ ] **Step 1: Write `hooks/useSectionSnap.ts`**
+- [x] **Step 1: Write `hooks/useSectionSnap.ts`**
 
 ```ts
 "use client";
@@ -200,7 +200,7 @@ export function useSectionSnap({
 }
 ```
 
-- [ ] **Step 2: Commit Task 1**
+- [x] **Step 2: Commit Task 1**
 
 ```bash
 git add hooks/useSectionSnap.ts
@@ -218,7 +218,7 @@ git commit -m "feat: add useSectionSnap hook with GSAP Observer and ScrollTo"
 **Interfaces:**
 - `SectionNavigator` mounts `useSectionSnap` client-side.
 
-- [ ] **Step 1: Create `components/SectionNavigator.tsx`**
+- [x] **Step 1: Create `components/SectionNavigator.tsx`**
 
 ```tsx
 "use client";
@@ -236,7 +236,7 @@ export default function SectionNavigator() {
 }
 ```
 
-- [ ] **Step 2: Import and mount `SectionNavigator` in `app/page.tsx`**
+- [x] **Step 2: Import and mount `SectionNavigator` in `app/page.tsx`**
 
 ```tsx
 import ParticlesBg from "@/components/ParticlesBg";
@@ -266,7 +266,7 @@ export default function Home() {
 }
 ```
 
-- [ ] **Step 3: Commit Task 2**
+- [x] **Step 3: Commit Task 2**
 
 ```bash
 git add components/SectionNavigator.tsx app/page.tsx
@@ -282,7 +282,7 @@ git commit -m "feat: integrate SectionNavigator into page"
 - Modify: `components/BirthdayCake.tsx`
 - Modify: `components/MemoryGallery.tsx`
 
-- [ ] **Step 1: Update `app/globals.css`**
+- [x] **Step 1: Update `app/globals.css`**
 Remove conflicting `scroll-snap-type: y mandatory;` from `html` while preserving smooth behavior and proper `100dvh` dimensions so GSAP can execute smooth transitions without browser snap jitter:
 
 ```css
@@ -311,7 +311,7 @@ And in `.snap-section`:
   }
 ```
 
-- [ ] **Step 2: Add `data-no-snap="true"` to `BirthdayCake.tsx` cake drag area**
+- [x] **Step 2: Add `data-no-snap="true"` to `BirthdayCake.tsx` cake drag area**
 On the cake interaction container (lines 66+ in `components/BirthdayCake.tsx`), add `data-no-snap="true"`:
 ```tsx
 <div
@@ -323,7 +323,7 @@ On the cake interaction container (lines 66+ in `components/BirthdayCake.tsx`), 
 >
 ```
 
-- [ ] **Step 3: Add `data-modal-open="true"` to Lightbox in `MemoryGallery.tsx`**
+- [x] **Step 3: Add `data-modal-open="true"` to Lightbox in `MemoryGallery.tsx`**
 When `selectedMemory` is active, mark the Lightbox container with `data-modal-open="true"`:
 ```tsx
 {selectedMemory && (
@@ -334,7 +334,7 @@ When `selectedMemory` is active, mark the Lightbox container with `data-modal-op
   >
 ```
 
-- [ ] **Step 4: Commit Task 3**
+- [x] **Step 4: Commit Task 3**
 
 ```bash
 git add app/globals.css components/BirthdayCake.tsx components/MemoryGallery.tsx
@@ -348,19 +348,19 @@ git commit -m "style: harmonize CSS and add interaction exclusion attributes"
 **Files:**
 - Test all components with `npm run build`
 
-- [ ] **Step 1: Run production build**
+- [x] **Step 1: Run production build**
 
 Run: `npm run build`
 Expected: Next.js compiles with 0 errors and output code passes TypeScript checks.
 
-- [ ] **Step 2: Verification Checklist**
+- [x] **Step 2: Verification Checklist**
 - Verify swipe gesture triggers smooth scroll with 35px threshold.
 - Verify wheel scroll triggers 1 section advance per flick.
 - Verify cake knife cutting drag does not trigger scroll.
 - Verify lightbox modal does not trigger scroll.
 - Verify `ScrollIndicator` click smoothly scrolls to next section.
 
-- [ ] **Step 3: Commit all remaining changes**
+- [x] **Step 3: Commit all remaining changes**
 
 ```bash
 git add -A
