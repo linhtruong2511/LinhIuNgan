@@ -1,6 +1,6 @@
 # Birthday Website Implementation Plan
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [x]`) syntax for tracking.
 
 **Goal:** Build a cinematic, scroll-driven single-page birthday website with interactive gift box, cake cutting, love letter, and memory gallery — optimized for mobile.
 
@@ -41,7 +41,7 @@
 **Interfaces:**
 - Produces: Next.js app shell running on `localhost:3000`, Tailwind with custom theme, `BIRTHDAY_CONFIG` object exported from `lib/constants.ts`
 
-- [ ] **Step 1: Initialize Next.js project**
+- [x] **Step 1: Initialize Next.js project**
 
 Run:
 ```powershell
@@ -50,7 +50,7 @@ cd d:\LinhIuNgan; npx create-next-app@14 . --typescript --tailwind --eslint --ap
 
 If the directory is not empty, answer "y" to proceed. Expected: project scaffolded with `package.json`, `tsconfig.json`, `app/` directory.
 
-- [ ] **Step 2: Install dependencies**
+- [x] **Step 2: Install dependencies**
 
 Run:
 ```powershell
@@ -59,7 +59,7 @@ cd d:\LinhIuNgan; npm install gsap @gsap/react framer-motion canvas-confetti; np
 
 Expected: packages added to `package.json` dependencies.
 
-- [ ] **Step 3: Configure Tailwind theme with custom colors**
+- [x] **Step 3: Configure Tailwind theme with custom colors**
 
 Replace the contents of `d:\LinhIuNgan\tailwind.config.ts` with:
 
@@ -110,7 +110,7 @@ const config: Config = {
 export default config;
 ```
 
-- [ ] **Step 4: Set up global CSS with custom styles**
+- [x] **Step 4: Set up global CSS with custom styles**
 
 Replace the contents of `d:\LinhIuNgan\app\globals.css` with:
 
@@ -159,7 +159,7 @@ Replace the contents of `d:\LinhIuNgan\app\globals.css` with:
 }
 ```
 
-- [ ] **Step 5: Create constants file with all personal content**
+- [x] **Step 5: Create constants file with all personal content**
 
 Create `d:\LinhIuNgan\lib\constants.ts`:
 
@@ -205,7 +205,7 @@ Yêu em nhiều lắm ❤️`,
 } as const;
 ```
 
-- [ ] **Step 6: Set up root layout with fonts and metadata**
+- [x] **Step 6: Set up root layout with fonts and metadata**
 
 Replace the contents of `d:\LinhIuNgan\app\layout.tsx` with:
 
@@ -232,7 +232,7 @@ export default function RootLayout({
 }
 ```
 
-- [ ] **Step 7: Create placeholder page**
+- [x] **Step 7: Create placeholder page**
 
 Replace the contents of `d:\LinhIuNgan\app\page.tsx` with:
 
@@ -248,14 +248,14 @@ export default function Home() {
 }
 ```
 
-- [ ] **Step 8: Create public asset directories**
+- [x] **Step 8: Create public asset directories**
 
 Run:
 ```powershell
 cd d:\LinhIuNgan; New-Item -ItemType File -Path "public\images\.gitkeep" -Force; New-Item -ItemType File -Path "public\videos\.gitkeep" -Force; New-Item -ItemType File -Path "public\music\.gitkeep" -Force; New-Item -ItemType File -Path "public\textures\.gitkeep" -Force
 ```
 
-- [ ] **Step 9: Verify dev server starts**
+- [x] **Step 9: Verify dev server starts**
 
 Run:
 ```powershell
@@ -264,7 +264,7 @@ cd d:\LinhIuNgan; npm run dev
 
 Expected: Server starts at `http://localhost:3000`, page shows "Happy Birthday ❤️" with teal glow text on dark background. Kill the server after verification.
 
-- [ ] **Step 10: Commit**
+- [x] **Step 10: Commit**
 
 Run:
 ```powershell
@@ -284,7 +284,7 @@ cd d:\LinhIuNgan; git add -A; git commit -m "feat: scaffold Next.js project with
 - Consumes: none
 - Produces: `<ParticlesBg />` component (renders canvas particles, accepts `particleCount?: number`), `<MusicPlayer />` component (fixed-position toggle button)
 
-- [ ] **Step 1: Create ParticlesBg component**
+- [x] **Step 1: Create ParticlesBg component**
 
 Create `d:\LinhIuNgan\components\ParticlesBg.tsx`:
 
@@ -389,7 +389,7 @@ export default function ParticlesBg({
 }
 ```
 
-- [ ] **Step 2: Create useMusicPlayer hook**
+- [x] **Step 2: Create useMusicPlayer hook**
 
 Create `d:\LinhIuNgan\hooks\useMusicPlayer.ts`:
 
@@ -440,7 +440,7 @@ export function useMusicPlayer(src: string) {
 }
 ```
 
-- [ ] **Step 3: Create MusicPlayer component**
+- [x] **Step 3: Create MusicPlayer component**
 
 Create `d:\LinhIuNgan\components\MusicPlayer.tsx`:
 
@@ -472,7 +472,7 @@ export default function MusicPlayer() {
 }
 ```
 
-- [ ] **Step 4: Verify — add components to page and test**
+- [x] **Step 4: Verify — add components to page and test**
 
 Temporarily update `d:\LinhIuNgan\app\page.tsx`:
 
@@ -495,7 +495,7 @@ export default function Home() {
 
 Run `npm run dev`. Expected: particles floating on dark background, music button in top-right corner. Clicking music button should show 🔇/🎵 toggle (audio won't play without a real .mp3 file but button should respond).
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```powershell
 cd d:\LinhIuNgan; git add -A; git commit -m "feat: add ParticlesBg and MusicPlayer components"
@@ -513,7 +513,7 @@ cd d:\LinhIuNgan; git add -A; git commit -m "feat: add ParticlesBg and MusicPlay
 - Consumes: `BIRTHDAY_CONFIG.name` from `lib/constants.ts`, `<ParticlesBg />` from Task 2
 - Produces: `<IntroSplash />` component (full-viewport intro with auto-play animation sequence), `<ScrollIndicator />` component
 
-- [ ] **Step 1: Create ScrollIndicator component**
+- [x] **Step 1: Create ScrollIndicator component**
 
 Create `d:\LinhIuNgan\components\ScrollIndicator.tsx`:
 
@@ -546,7 +546,7 @@ export default function ScrollIndicator() {
 }
 ```
 
-- [ ] **Step 2: Create IntroSplash component with auto-play animation**
+- [x] **Step 2: Create IntroSplash component with auto-play animation**
 
 Create `d:\LinhIuNgan\components\IntroSplash.tsx`:
 
@@ -641,7 +641,7 @@ export default function IntroSplash() {
 }
 ```
 
-- [ ] **Step 3: Wire IntroSplash into page**
+- [x] **Step 3: Wire IntroSplash into page**
 
 Replace `d:\LinhIuNgan\app\page.tsx` with:
 
@@ -665,11 +665,11 @@ export default function Home() {
 }
 ```
 
-- [ ] **Step 4: Verify**
+- [x] **Step 4: Verify**
 
 Run `npm run dev`. Expected: Dark background with particles, "Happy Birthday" fades in with scale effect, name appears with letter-spacing animation, subtitle fades in, scroll indicator bounces at bottom.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```powershell
 cd d:\LinhIuNgan; git add -A; git commit -m "feat: add IntroSplash and ScrollIndicator components"
@@ -686,7 +686,7 @@ cd d:\LinhIuNgan; git add -A; git commit -m "feat: add IntroSplash and ScrollInd
 - Consumes: `BIRTHDAY_CONFIG.sweetWords` from `lib/constants.ts`, GSAP ScrollTrigger
 - Produces: `<SweetWords />` component (scroll-driven text reveals with parallax background)
 
-- [ ] **Step 1: Create SweetWords component**
+- [x] **Step 1: Create SweetWords component**
 
 Create `d:\LinhIuNgan\components\SweetWords.tsx`:
 
@@ -772,7 +772,7 @@ export default function SweetWords() {
 }
 ```
 
-- [ ] **Step 2: Add SweetWords to page**
+- [x] **Step 2: Add SweetWords to page**
 
 Update `d:\LinhIuNgan\app\page.tsx` — add `import SweetWords from "@/components/SweetWords";` and replace the placeholder div after `<IntroSplash />` with `<SweetWords />`:
 
@@ -796,11 +796,11 @@ export default function Home() {
 }
 ```
 
-- [ ] **Step 3: Verify**
+- [x] **Step 3: Verify**
 
 Run `npm run dev`. Expected: After intro, scrolling reveals each sweet word one by one with fade-in and slide-up. Words fade out as you scroll past them. Background gradient subtly shifts.
 
-- [ ] **Step 4: Commit**
+- [x] **Step 4: Commit**
 
 ```powershell
 cd d:\LinhIuNgan; git add -A; git commit -m "feat: add SweetWords scroll-driven section"
@@ -817,7 +817,7 @@ cd d:\LinhIuNgan; git add -A; git commit -m "feat: add SweetWords scroll-driven 
 - Consumes: GSAP ScrollTrigger (pin), canvas-confetti
 - Produces: `<GiftBox />` component (pinned section with 3D gift box, tap to open, confetti burst, auto-unpin)
 
-- [ ] **Step 1: Create GiftBox component**
+- [x] **Step 1: Create GiftBox component**
 
 Create `d:\LinhIuNgan\components\GiftBox.tsx`:
 
@@ -953,7 +953,7 @@ export default function GiftBox() {
 }
 ```
 
-- [ ] **Step 2: Add GiftBox to page**
+- [x] **Step 2: Add GiftBox to page**
 
 Update `d:\LinhIuNgan\app\page.tsx`:
 
@@ -979,11 +979,11 @@ export default function Home() {
 }
 ```
 
-- [ ] **Step 3: Verify**
+- [x] **Step 3: Verify**
 
 Run `npm run dev`. Expected: After sweet words, scroll pins the gift box section. Tapping the gift box opens the lid (3D flip up), confetti bursts, golden glow appears, text changes to "Surprise! 🎉". After 2s the pin releases and scroll continues.
 
-- [ ] **Step 4: Commit**
+- [x] **Step 4: Commit**
 
 ```powershell
 cd d:\LinhIuNgan; git add -A; git commit -m "feat: add GiftBox pinned section with tap-to-open and confetti"
@@ -1000,7 +1000,7 @@ cd d:\LinhIuNgan; git add -A; git commit -m "feat: add GiftBox pinned section wi
 - Consumes: GSAP ScrollTrigger (pin), canvas-confetti
 - Produces: `<BirthdayCake />` component (pinned section with CSS cake, draggable knife, cut animation)
 
-- [ ] **Step 1: Create BirthdayCake component**
+- [x] **Step 1: Create BirthdayCake component**
 
 Create `d:\LinhIuNgan\components\BirthdayCake.tsx`:
 
@@ -1213,7 +1213,7 @@ export default function BirthdayCake() {
 }
 ```
 
-- [ ] **Step 2: Add BirthdayCake to page**
+- [x] **Step 2: Add BirthdayCake to page**
 
 Update `d:\LinhIuNgan\app\page.tsx`:
 
@@ -1241,11 +1241,11 @@ export default function Home() {
 }
 ```
 
-- [ ] **Step 3: Verify**
+- [x] **Step 3: Verify**
 
 Run `npm run dev`. Expected: After gift box, scroll pins the cake section. A 3-tier cake with candle flames appears. Dragging the knife horizontally past the threshold triggers the cut animation (cake splits in two halves), sparkle confetti fires, candles go out, text changes. After 1.8s the pin releases.
 
-- [ ] **Step 4: Commit**
+- [x] **Step 4: Commit**
 
 ```powershell
 cd d:\LinhIuNgan; git add -A; git commit -m "feat: add BirthdayCake pinned section with drag-to-cut interaction"
@@ -1262,7 +1262,7 @@ cd d:\LinhIuNgan; git add -A; git commit -m "feat: add BirthdayCake pinned secti
 - Consumes: `BIRTHDAY_CONFIG.name`, `BIRTHDAY_CONFIG.letterContent` from `lib/constants.ts`, GSAP ScrollTrigger (pin)
 - Produces: `<LoveLetter />` component (pinned section with envelope, tap to open, letter reveal with typewriter text)
 
-- [ ] **Step 1: Create LoveLetter component**
+- [x] **Step 1: Create LoveLetter component**
 
 Create `d:\LinhIuNgan\components\LoveLetter.tsx`:
 
@@ -1429,7 +1429,7 @@ export default function LoveLetter() {
 }
 ```
 
-- [ ] **Step 2: Add a fade-in utility to globals.css**
+- [x] **Step 2: Add a fade-in utility to globals.css**
 
 Append to `d:\LinhIuNgan\app\globals.css`:
 
@@ -1451,7 +1451,7 @@ Append to `d:\LinhIuNgan\app\globals.css`:
 }
 ```
 
-- [ ] **Step 3: Add LoveLetter to page**
+- [x] **Step 3: Add LoveLetter to page**
 
 Update `d:\LinhIuNgan\app\page.tsx`:
 
@@ -1481,11 +1481,11 @@ export default function Home() {
 }
 ```
 
-- [ ] **Step 4: Verify**
+- [x] **Step 4: Verify**
 
 Run `npm run dev`. Expected: After cake, scroll pins the letter section. An envelope with "Gửi Linh ❤️" appears. Tapping it opens the flap (3D rotation). After 1.2s the letter appears with lined paper background, text reveals line by line (typewriter). After all lines shown, "Đã đọc xong ❤️" button appears. Clicking it unpins and allows scrolling.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```powershell
 cd d:\LinhIuNgan; git add -A; git commit -m "feat: add LoveLetter pinned section with envelope open and typewriter text"
@@ -1503,7 +1503,7 @@ cd d:\LinhIuNgan; git add -A; git commit -m "feat: add LoveLetter pinned section
 - Consumes: `BIRTHDAY_CONFIG.memories`, `BIRTHDAY_CONFIG.name` from `lib/constants.ts`, GSAP ScrollTrigger, canvas-confetti
 - Produces: `<MemoryGallery />` component (scroll-driven gallery with polaroid frames scattered around, lightbox overlay)
 
-- [ ] **Step 1: Create Lightbox component**
+- [x] **Step 1: Create Lightbox component**
 
 Create `d:\LinhIuNgan\components\Lightbox.tsx`:
 
@@ -1618,7 +1618,7 @@ export default function Lightbox({
 }
 ```
 
-- [ ] **Step 2: Create MemoryGallery component**
+- [x] **Step 2: Create MemoryGallery component**
 
 Create `d:\LinhIuNgan\components\MemoryGallery.tsx`:
 
@@ -1810,7 +1810,7 @@ export default function MemoryGallery() {
 }
 ```
 
-- [ ] **Step 3: Add MemoryGallery to page (final page.tsx)**
+- [x] **Step 3: Add MemoryGallery to page (final page.tsx)**
 
 Replace `d:\LinhIuNgan\app\page.tsx` with:
 
@@ -1840,13 +1840,13 @@ export default function Home() {
 }
 ```
 
-- [ ] **Step 4: Verify**
+- [x] **Step 4: Verify**
 
 Run `npm run dev`. Expected: After the letter, scrolling into the gallery section shows a cake emoji at center with polaroid frames scattering outward. Tapping a frame opens the lightbox (image/video + caption, arrow navigation). Scrolling to the end triggers finale confetti burst and "Happy Birthday, Linh ❤️" text.
 
 Note: Images/videos won't load yet (user hasn't added them), but the layout, animations, and lightbox should work with gray placeholders.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```powershell
 cd d:\LinhIuNgan; git add -A; git commit -m "feat: add MemoryGallery with scattered polaroids and Lightbox"
@@ -1865,7 +1865,7 @@ cd d:\LinhIuNgan; git add -A; git commit -m "feat: add MemoryGallery with scatte
 - Consumes: All components from Tasks 1–8
 - Produces: Production-ready configuration, image error fallbacks, proper Next.js image config
 
-- [ ] **Step 1: Configure next.config.js for images and videos**
+- [x] **Step 1: Configure next.config.js for images and videos**
 
 Replace `d:\LinhIuNgan\next.config.js` with:
 
@@ -1889,7 +1889,7 @@ const nextConfig = {
 module.exports = nextConfig;
 ```
 
-- [ ] **Step 2: Fix viewport metadata export (Next.js 14 requires separate export)**
+- [x] **Step 2: Fix viewport metadata export (Next.js 14 requires separate export)**
 
 Update `d:\LinhIuNgan\app\layout.tsx` — the viewport should be a separate export in Next.js 14:
 
@@ -1921,7 +1921,7 @@ export default function RootLayout({
 }
 ```
 
-- [ ] **Step 3: Add image error fallback to MemoryGallery**
+- [x] **Step 3: Add image error fallback to MemoryGallery**
 
 In `d:\LinhIuNgan\components\MemoryGallery.tsx`, update the Image component inside the polaroid frame to handle errors. Find the Image component and wrap it:
 
@@ -1959,7 +1959,7 @@ Similarly update the Image in `Lightbox.tsx`:
 />
 ```
 
-- [ ] **Step 4: Build and verify production build**
+- [x] **Step 4: Build and verify production build**
 
 Run:
 ```powershell
@@ -1968,13 +1968,13 @@ cd d:\LinhIuNgan; npm run build
 
 Expected: Build succeeds without errors. Check for any TypeScript or ESLint issues and fix them.
 
-- [ ] **Step 5: Commit final polish**
+- [x] **Step 5: Commit final polish**
 
 ```powershell
 cd d:\LinhIuNgan; git add -A; git commit -m "feat: final polish — next config, viewport, image error handling"
 ```
 
-- [ ] **Step 6: Verify full flow end-to-end**
+- [x] **Step 6: Verify full flow end-to-end**
 
 Run `npm run dev` and walk through the entire flow on Chrome DevTools mobile mode (iPhone 12/14 viewport):
 
@@ -1987,7 +1987,7 @@ Run `npm run dev` and walk through the entire flow on Chrome DevTools mobile mod
 7. ✅ Music toggle works in top-right corner
 8. ✅ No console errors
 
-- [ ] **Step 7: Final commit**
+- [x] **Step 7: Final commit**
 
 ```powershell
 cd d:\LinhIuNgan; git add -A; git commit -m "chore: verify full flow end-to-end"
