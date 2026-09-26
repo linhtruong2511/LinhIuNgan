@@ -4,6 +4,7 @@ import IntroSplash from "@/components/IntroSplash";
 import SweetWords from "@/components/SweetWords";
 import GiftBox from "@/components/GiftBox";
 import BirthdayCake from "@/components/BirthdayCake";
+import LoveLetter from "@/components/LoveLetter";
 
 export default function Home() {
   return (
@@ -14,7 +15,8 @@ export default function Home() {
       <SweetWords />
       <GiftBox />
       <BirthdayCake />
-      {/* Placeholder for remaining sections */}
+      <LoveLetter />
+      {/* Placeholder for remaining section */}
       <div className="h-screen bg-deep-night" />
     </main>
   );
