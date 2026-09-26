@@ -48,6 +48,7 @@ export default function Lightbox({
 
   return (
     <div
+      data-modal-open="true"
       className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm"
       onClick={onClose}
     >

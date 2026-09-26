@@ -1,11 +1,8 @@
 "use client";
 
-import { useEffect, useRef, useState, useCallback } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useRef, useState, useCallback } from "react";
 import confetti from "canvas-confetti";
-
-gsap.registerPlugin(ScrollTrigger);
+import ScrollIndicator from "./ScrollIndicator";
 
 export default function BirthdayCake() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -14,21 +11,6 @@ export default function BirthdayCake() {
   const [knifeX, setKnifeX] = useState(0);
   const isDragging = useRef(false);
   const startX = useRef(0);
-  const pinRef = useRef<ScrollTrigger | null>(null);
-
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      pinRef.current = ScrollTrigger.create({
-        trigger: sectionRef.current,
-        start: "top top",
-        end: "+=100%",
-        pin: true,
-        pinSpacing: true,
-      });
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, []);
 
   const handlePointerDown = useCallback(
     (e: React.PointerEvent) => {
@@ -59,12 +41,6 @@ export default function BirthdayCake() {
           colors: ["#FFD93D", "#FF6B6B", "#4ECDC4"],
           scalar: 0.8,
         });
-
-        // Auto-unpin after celebration
-        setTimeout(() => {
-          pinRef.current?.kill();
-          ScrollTrigger.refresh();
-        }, 1800);
       }
     },
     [isCut]
@@ -80,10 +56,15 @@ export default function BirthdayCake() {
   return (
     <section
       ref={sectionRef}
-      className="h-screen flex flex-col items-center justify-center bg-gradient-to-b from-deep-night to-rose-red/10 relative overflow-hidden"
+      id="section-cake"
+      data-snap-section="true"
+      className="snap-section relative flex flex-col items-center justify-center bg-transparent overflow-hidden px-6"
     >
+      {/* Soft ambient warm candle glow */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(255,217,61,0.1)_0%,_rgba(230,57,70,0.05)_40%,_transparent_70%)] pointer-events-none z-[1]" />
+
       {/* Cake */}
-      <div className="relative">
+      <div className="relative z-10">
         {/* Candles */}
         <div className="flex justify-center gap-4 mb-1 relative z-10">
           {[...Array(5)].map((_, i) => (
@@ -148,59 +129,58 @@ export default function BirthdayCake() {
           </div>
         </div>
 
-        {/* Cake plate */}
-        <div className="w-80 h-4 bg-gradient-to-b from-gray-200 to-gray-400 rounded-full mx-auto -mt-1 shadow-lg" />
+        {/* Plate */}
+        <div className="w-52 md:w-60 h-3 bg-white/20 rounded-full mx-auto mt-1 border border-white/30" />
+
+        {/* Knife drag track */}
+        {!isCut && (
+          <div className="relative mt-8 w-48 mx-auto" data-no-snap="true">
+            {/* Track line */}
+            <div className="h-1 bg-white/20 rounded-full" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-xs text-white/40 pointer-events-none whitespace-nowrap">
+              ◄ Kéo dao qua để cắt ►
+            </div>
+
+            {/* Knife handle */}
+            <div
+              ref={knifeRef}
+              data-no-snap="true"
+              onPointerDown={handlePointerDown}
+              onPointerMove={handlePointerMove}
+              onPointerUp={handlePointerUp}
+              className="absolute -top-4 left-1/2 cursor-grab active:cursor-grabbing touch-none select-none z-20"
+              style={{
+                transform: `translateX(calc(-50% + ${knifeX}px))`,
+                transition: isDragging.current ? "none" : "transform 0.3s ease",
+              }}
+            >
+              <div className="text-3xl filter drop-shadow-lg transform -rotate-45 hover:scale-110 transition-transform">
+                🔪
+              </div>
+            </div>
+          </div>
+        )}
       </div>
 
-      {/* Knife (draggable) */}
-      {!isCut && (
-        <div
-          ref={knifeRef}
-          className="mt-8 cursor-grab active:cursor-grabbing touch-none select-none"
-          style={{ transform: `translateX(${knifeX}px)` }}
-          onPointerDown={handlePointerDown}
-          onPointerMove={handlePointerMove}
-          onPointerUp={handlePointerUp}
-        >
-          {/* Knife SVG */}
-          <svg width="120" height="40" viewBox="0 0 120 40">
-            {/* Blade */}
-            <path
-              d="M0 20 L80 5 L80 35 Z"
-              fill="url(#blade)"
-              stroke="#ccc"
-              strokeWidth="0.5"
-            />
-            {/* Handle */}
-            <rect
-              x="78"
-              y="8"
-              width="40"
-              height="24"
-              rx="4"
-              fill="#8B4513"
-              stroke="#654321"
-              strokeWidth="1"
-            />
-            <defs>
-              <linearGradient id="blade" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="#E8E8E8" />
-                <stop offset="50%" stopColor="#D0D0D0" />
-                <stop offset="100%" stopColor="#B0B0B0" />
-              </linearGradient>
-            </defs>
-          </svg>
-        </div>
-      )}
-
-      {/* Text */}
+      {/* Prompt text */}
       <p
-        className={`mt-6 text-xl md:text-2xl font-dancing transition-all duration-500 ${
-          isCut ? "text-candle-gold text-glow-warm" : "text-white/80"
+        className={`mt-6 text-xl md:text-2xl font-dancing transition-all duration-500 z-10 ${
+          isCut
+            ? "text-candle-gold text-glow"
+            : "text-white/80 animate-pulse-glow"
         }`}
       >
-        {isCut ? "Tuyệt vời! 🎂✨" : "Kéo dao để cắt bánh nào! 🔪"}
+        {isCut
+          ? "Chúc em tuổi mới ngọt ngào như chiếc bánh này! 🎂✨"
+          : "Kéo dao qua để cắt bánh nhé 🎂"}
       </p>
+
+      {/* Next step indicator */}
+      <div className="z-10">
+        <ScrollIndicator
+          text={isCut ? "Xem bức thư bí mật 💌" : "Cuộn tiếp nhé ↓"}
+        />
+      </div>
     </section>
   );
 }
