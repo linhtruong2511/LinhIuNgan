@@ -34,17 +34,17 @@ export default function GiftAndCakeScene({
 
   // Stage 1 (Cake) Lid Drag & Peek MotionValues
   const lidY1 = useMotionValue(0);
-  const lidRotate1 = useTransform(lidY1, [0, -120], [0, -5]);
+  const lidRotate1 = useTransform(lidY1, [0, -120], [0, -4]);
   const lidOpacity1 = useTransform(lidY1, [-120, -220], [1, 0]);
-  const cakePeekY = useTransform(lidY1, [0, -75], [26, -18]);
-  const cakePeekOpacity = useTransform(lidY1, [0, -12, -60], [0, 0.8, 1]);
+  const cakePeekY = useTransform(lidY1, [0, -75], [48, 16]);
+  const cakePeekOpacity = useTransform(lidY1, [0, -10, -50], [0, 0.7, 1]);
 
   // Stage 4 (Letter) Lid Drag & Peek MotionValues
   const lidY2 = useMotionValue(0);
-  const lidRotate2 = useTransform(lidY2, [0, -120], [0, -5]);
+  const lidRotate2 = useTransform(lidY2, [0, -120], [0, -4]);
   const lidOpacity2 = useTransform(lidY2, [-120, -220], [1, 0]);
-  const letterPeekY = useTransform(lidY2, [0, -75], [26, -18]);
-  const letterPeekOpacity = useTransform(lidY2, [0, -12, -60], [0, 0.8, 1]);
+  const letterPeekY = useTransform(lidY2, [0, -75], [44, 14]);
+  const letterPeekOpacity = useTransform(lidY2, [0, -10, -50], [0, 0.7, 1]);
 
   const letterLines = BIRTHDAY_CONFIG.letterContent
     .split("\n")
@@ -214,7 +214,7 @@ export default function GiftAndCakeScene({
             <motion.div
               drag="y"
               dragConstraints={{ top: -140, bottom: 0 }}
-              dragElastic={{ top: 0.25, bottom: 0.05 }}
+              dragElastic={{ top: 0.25, bottom: 0 }}
               style={{
                 y: lidY1,
                 rotate: lidRotate1,
@@ -230,9 +230,9 @@ export default function GiftAndCakeScene({
             >
               {/* Upward Drag Arrow Cue */}
               <motion.div
-                animate={{ y: [-1, -5, -1], opacity: [0.65, 1, 0.65] }}
+                animate={{ y: [-1, -5, -1], opacity: [0.7, 1, 0.7] }}
                 transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
-                className="flex items-center gap-1 text-candle-gold/90 text-xs font-medium pb-1 drop-shadow-[0_0_8px_rgba(255,217,61,0.8)] pointer-events-none"
+                className="flex items-center gap-1 text-candle-gold text-xs font-medium pb-1 drop-shadow-[0_0_8px_rgba(255,217,61,0.8)] pointer-events-none"
               >
                 <span className="text-[10px]">▲</span>
                 <span className="font-dancing tracking-wider text-xs">Cầm nắp kéo lên</span>
@@ -240,54 +240,58 @@ export default function GiftAndCakeScene({
               </motion.div>
 
               {/* Ribbon Bow on top */}
-              <div className="relative -mb-1 flex items-center justify-center">
+              <div className="relative -mb-1 flex items-center justify-center z-10">
                 <div className="w-7 h-7 rounded-full border-[3px] border-amber-300 bg-candle-gold -rotate-45 shadow-md -mr-1.5" />
                 <div className="w-7 h-7 rounded-full border-[3px] border-amber-300 bg-candle-gold rotate-45 shadow-md -ml-1.5" />
-                <div className="absolute w-4.5 h-4.5 rounded-full bg-amber-400 border border-amber-200 shadow-inner z-10" />
+                <div className="absolute w-4 h-4 rounded-full bg-amber-400 border border-amber-200 shadow-inner z-10" />
               </div>
 
-              {/* Lid Cap (Fitted width: w-46 md:w-54) */}
-              <div className="w-46 h-8 md:w-54 md:h-9 bg-gradient-to-r from-red-600 via-rose-600 to-red-700 rounded-t-lg rounded-b-[2px] border-2 border-candle-gold/70 relative shadow-lg flex items-center justify-center">
-                <div className="absolute w-8 h-full bg-gradient-to-r from-candle-gold via-amber-300 to-candle-gold shadow-sm" />
-                <div className="absolute h-1 w-full bottom-0 bg-candle-gold/50" />
+              {/* Lid Cap (Fitted width: 188px on mobile, 222px on desktop) */}
+              <div className="w-[188px] h-[34px] md:w-[222px] md:h-[38px] bg-gradient-to-r from-red-600 via-rose-600 to-red-700 rounded-t-lg rounded-b-[2px] border-2 border-candle-gold/80 relative shadow-lg flex items-center justify-center">
+                {/* Vertical Ribbon aligned with body */}
+                <div className="w-8 h-full bg-gradient-to-r from-candle-gold via-amber-300 to-candle-gold shadow-sm" />
+                {/* Gold rim at bottom */}
+                <div className="absolute h-1 w-full bottom-0 bg-candle-gold/60" />
               </div>
             </motion.div>
 
-            {/* Box Body Area with Peeking Cake */}
-            <div className="relative -mt-0.5">
-              {/* Peeking Cake Preview (behind box front, revealed as lid is pulled up) */}
-              <motion.div
-                style={{
-                  y: cakePeekY,
-                  opacity: cakePeekOpacity,
-                }}
-                className="absolute left-1/2 -translate-x-1/2 bottom-full mb-0 z-10 pointer-events-none flex flex-col items-center"
-              >
-                {/* Candles */}
-                <div className="flex gap-2 mb-0.5">
-                  {[0, 1, 2, 3].map((i) => (
-                    <div key={i} className="flex flex-col items-center">
-                      <div
-                        className="w-1.5 h-2.5 bg-gradient-to-t from-candle-gold to-orange-400 rounded-full animate-flicker"
-                        style={{ animationDelay: `${i * 0.15}s` }}
-                      />
-                      <div className="w-1 h-3.5 bg-teal-accent rounded-xs shadow-xs" />
-                    </div>
-                  ))}
-                </div>
-                {/* Cake Top Tier Peek */}
-                <div className="w-28 md:w-32 h-6 bg-gradient-to-r from-pink-300 via-pink-400 to-rose-500 rounded-t-xl border border-pink-200/80 shadow-inner relative overflow-hidden flex items-center justify-center">
-                  <div className="absolute top-0 w-full h-1 bg-white/50 rounded-t-xl" />
-                  <div className="flex gap-2 mt-0.5">
-                    <div className="w-1.5 h-1.5 rounded-full bg-white/70" />
-                    <div className="w-1.5 h-1.5 rounded-full bg-white/70" />
-                    <div className="w-1.5 h-1.5 rounded-full bg-white/70" />
+            {/* Box Body Area with Centered Peeking Cake */}
+            <div className="relative w-44 md:w-52 -mt-0.5">
+              {/* Peeking Cake Container: centered horizontally across full box width */}
+              <div className="absolute left-0 right-0 bottom-full flex justify-center pointer-events-none z-10">
+                <motion.div
+                  style={{
+                    y: cakePeekY,
+                    opacity: cakePeekOpacity,
+                  }}
+                  className="flex flex-col items-center"
+                >
+                  {/* Candles */}
+                  <div className="flex gap-2.5 mb-0.5">
+                    {[0, 1, 2, 3].map((i) => (
+                      <div key={i} className="flex flex-col items-center">
+                        <div
+                          className="w-1.5 h-2.5 bg-gradient-to-t from-candle-gold to-orange-400 rounded-full animate-flicker"
+                          style={{ animationDelay: `${i * 0.15}s` }}
+                        />
+                        <div className="w-1 h-3 bg-teal-accent rounded-xs shadow-xs" />
+                      </div>
+                    ))}
                   </div>
-                </div>
-              </motion.div>
+                  {/* Cake Top Tier Peek */}
+                  <div className="w-28 md:w-32 h-6 bg-gradient-to-r from-pink-300 via-pink-400 to-rose-500 rounded-t-xl border border-pink-200/80 shadow-inner relative overflow-hidden flex items-center justify-center">
+                    <div className="absolute top-0 w-full h-1 bg-white/50 rounded-t-xl" />
+                    <div className="flex gap-2 mt-0.5">
+                      <div className="w-1.5 h-1.5 rounded-full bg-white/70" />
+                      <div className="w-1.5 h-1.5 rounded-full bg-white/70" />
+                      <div className="w-1.5 h-1.5 rounded-full bg-white/70" />
+                    </div>
+                  </div>
+                </motion.div>
+              </div>
 
-              {/* Box Body (z-20 so it covers the lower part of peeking cake) */}
-              <div className="relative z-20 w-44 h-36 md:w-52 md:h-40 bg-gradient-to-b from-rose-700 via-red-800 to-red-950 rounded-b-2xl border-2 border-t-0 border-candle-gold/60 shadow-2xl flex items-center justify-center overflow-hidden">
+              {/* Box Body (z-20 covers peeking cake when tucked down) */}
+              <div className="relative z-20 w-full h-36 md:h-40 bg-gradient-to-b from-rose-700 via-red-800 to-red-950 rounded-b-2xl border-2 border-t-0 border-candle-gold/60 shadow-2xl flex items-center justify-center overflow-hidden">
                 <div className="absolute w-8 h-full bg-gradient-to-r from-candle-gold via-amber-300 to-candle-gold shadow-md" />
                 <div className="absolute inset-0 bg-gradient-to-b from-black/35 via-transparent to-black/25 pointer-events-none" />
               </div>
@@ -525,7 +529,7 @@ export default function GiftAndCakeScene({
             <motion.div
               drag="y"
               dragConstraints={{ top: -140, bottom: 0 }}
-              dragElastic={{ top: 0.25, bottom: 0.05 }}
+              dragElastic={{ top: 0.25, bottom: 0 }}
               style={{
                 y: lidY2,
                 rotate: lidRotate2,
@@ -541,9 +545,9 @@ export default function GiftAndCakeScene({
             >
               {/* Upward Drag Arrow Cue */}
               <motion.div
-                animate={{ y: [-1, -5, -1], opacity: [0.65, 1, 0.65] }}
+                animate={{ y: [-1, -5, -1], opacity: [0.7, 1, 0.7] }}
                 transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
-                className="flex items-center gap-1 text-candle-gold/90 text-xs font-medium pb-1 drop-shadow-[0_0_8px_rgba(255,217,61,0.8)] pointer-events-none"
+                className="flex items-center gap-1 text-candle-gold text-xs font-medium pb-1 drop-shadow-[0_0_8px_rgba(255,217,61,0.8)] pointer-events-none"
               >
                 <span className="text-[10px]">▲</span>
                 <span className="font-dancing tracking-wider text-xs">Kéo nắp mở nốt nhé</span>
@@ -551,36 +555,38 @@ export default function GiftAndCakeScene({
               </motion.div>
 
               {/* Ribbon Bow on top */}
-              <div className="relative -mb-1 flex items-center justify-center">
+              <div className="relative -mb-1 flex items-center justify-center z-10">
                 <div className="w-7 h-7 rounded-full border-[3px] border-amber-300 bg-candle-gold -rotate-45 shadow-md -mr-1.5" />
                 <div className="w-7 h-7 rounded-full border-[3px] border-amber-300 bg-candle-gold rotate-45 shadow-md -ml-1.5" />
-                <div className="absolute w-4.5 h-4.5 rounded-full bg-amber-400 border border-amber-200 shadow-inner z-10" />
+                <div className="absolute w-4 h-4 rounded-full bg-amber-400 border border-amber-200 shadow-inner z-10" />
               </div>
 
-              {/* Lid Cap (Fitted width: w-46 md:w-54) */}
-              <div className="w-46 h-8 md:w-54 md:h-9 bg-gradient-to-r from-red-600 via-rose-600 to-red-700 rounded-t-lg rounded-b-[2px] border-2 border-candle-gold/70 relative shadow-lg flex items-center justify-center">
-                <div className="absolute w-8 h-full bg-gradient-to-r from-candle-gold via-amber-300 to-candle-gold shadow-sm" />
-                <div className="absolute h-1 w-full bottom-0 bg-candle-gold/50" />
+              {/* Lid Cap (Fitted width: 188px on mobile, 222px on desktop) */}
+              <div className="w-[188px] h-[34px] md:w-[222px] md:h-[38px] bg-gradient-to-r from-red-600 via-rose-600 to-red-700 rounded-t-lg rounded-b-[2px] border-2 border-candle-gold/80 relative shadow-lg flex items-center justify-center">
+                <div className="w-8 h-full bg-gradient-to-r from-candle-gold via-amber-300 to-candle-gold shadow-sm" />
+                <div className="absolute h-1 w-full bottom-0 bg-candle-gold/60" />
               </div>
             </motion.div>
 
-            {/* Box Body Area with Peeking Letter */}
-            <div className="relative -mt-0.5">
-              {/* Peeking Letter Preview */}
-              <motion.div
-                style={{
-                  y: letterPeekY,
-                  opacity: letterPeekOpacity,
-                }}
-                className="absolute left-1/2 -translate-x-1/2 bottom-full mb-0 z-10 pointer-events-none flex flex-col items-center"
-              >
-                <div className="w-24 md:w-28 h-8 bg-paper-cream/95 rounded-t-lg border-2 border-b-0 border-amber-300 shadow-md flex items-center justify-center px-1.5">
-                  <span className="text-[11px] font-vibes text-rose-red font-semibold whitespace-nowrap">💌 Thư gửi em</span>
-                </div>
-              </motion.div>
+            {/* Box Body Area with Centered Peeking Letter */}
+            <div className="relative w-44 md:w-52 -mt-0.5">
+              {/* Peeking Letter Container */}
+              <div className="absolute left-0 right-0 bottom-full flex justify-center pointer-events-none z-10">
+                <motion.div
+                  style={{
+                    y: letterPeekY,
+                    opacity: letterPeekOpacity,
+                  }}
+                  className="flex flex-col items-center"
+                >
+                  <div className="w-24 md:w-28 h-8 bg-paper-cream/95 rounded-t-lg border-2 border-b-0 border-amber-300 shadow-md flex items-center justify-center px-1.5">
+                    <span className="text-[11px] font-vibes text-rose-red font-semibold whitespace-nowrap">💌 Thư gửi em</span>
+                  </div>
+                </motion.div>
+              </div>
 
               {/* Box Body */}
-              <div className="relative z-20 w-44 h-36 md:w-52 md:h-40 bg-gradient-to-b from-rose-700 via-red-800 to-red-950 rounded-b-2xl border-2 border-t-0 border-candle-gold/60 shadow-2xl flex items-center justify-center overflow-hidden">
+              <div className="relative z-20 w-full h-36 md:h-40 bg-gradient-to-b from-rose-700 via-red-800 to-red-950 rounded-b-2xl border-2 border-t-0 border-candle-gold/60 shadow-2xl flex items-center justify-center overflow-hidden">
                 <div className="absolute w-8 h-full bg-gradient-to-r from-candle-gold via-amber-300 to-candle-gold shadow-md" />
                 <div className="absolute inset-0 bg-gradient-to-b from-black/35 via-transparent to-black/25 pointer-events-none" />
               </div>
