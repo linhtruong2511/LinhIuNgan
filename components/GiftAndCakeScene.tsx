@@ -219,7 +219,7 @@ export default function GiftAndCakeScene({
                 className="flex items-center gap-1 text-candle-gold text-xs font-medium pb-1 drop-shadow-[0_0_8px_rgba(255,217,61,0.8)] pointer-events-none"
               >
                 <span className="text-[10px]">▲</span>
-                <span className="font-dancing tracking-wider text-xs">Cầm nắp kéo lên</span>
+                <span className="font-dancing tracking-wider text-xs">Em mở nắp lên thử ikk</span>
                 <span className="text-[10px]">▲</span>
               </motion.div>
 
@@ -288,10 +288,10 @@ export default function GiftAndCakeScene({
             className="cursor-pointer flex flex-col items-center mt-7 hover:scale-105 transition-transform text-center max-w-sm px-4"
           >
             <p className="text-xl md:text-2xl font-dancing text-candle-gold text-glow animate-pulse text-center">
-              Kéo nắp hộp lên nhé 🎁
+              Anh có món quà dành cho em nè
             </p>
             <span className="text-[11px] text-white/60 font-light mt-1 tracking-wider text-center">
-              (Hoặc chạm vào đây để mở)
+              {/* (Hoặc chạm vào đây để mở) */}
             </span>
           </div>
         </motion.div>
@@ -443,7 +443,7 @@ export default function GiftAndCakeScene({
           >
             {stage === "cake_cut"
               ? "Chúc em tuổi mới ngọt ngào như chiếc bánh này! 🎂✨"
-              : "Cầm dao đưa qua bánh để cắt nhé 🎂"}
+              : "Chúc mừng sinh nhật bạn nhỏ nheeee! 🎂"}
           </motion.p>
 
           {/* GIFT BOX PUSHED GENTLY TO BACKGROUND */}
@@ -471,7 +471,7 @@ export default function GiftAndCakeScene({
             >
               {/* Tooltip hint above knife */}
               <div className="mb-1 px-2.5 py-0.5 rounded-full bg-deep-night/85 border border-candle-gold/70 text-candle-gold text-[11px] font-dancing whitespace-nowrap shadow-lg animate-pulse">
-                👈 Kéo dao vào bánh
+                👈 Em cắt bánh ikk
               </div>
 
               {/* Draggable Knife Item */}
@@ -533,7 +533,7 @@ export default function GiftAndCakeScene({
                     className="flex items-center gap-1 text-candle-gold text-xs font-medium pb-1.5 drop-shadow-[0_0_8px_rgba(255,217,61,0.8)] pointer-events-none"
                   >
                     <span className="text-[10px]">▲</span>
-                    <span className="font-dancing tracking-wider text-xs">Cầm thư kéo lên nhé</span>
+                    <span className="font-dancing tracking-wider text-xs">Em có thư nè</span>
                     <span className="text-[10px]">▲</span>
                   </motion.div>
 
@@ -543,7 +543,7 @@ export default function GiftAndCakeScene({
                     <div className="flex items-center gap-1">
                       <span className="text-[11px]">💌</span>
                       <span className="text-xs font-vibes text-rose-red font-bold tracking-wider">
-                        Thư gửi em
+                        Gửi bạn nhỏ
                       </span>
                     </div>
 
@@ -579,11 +579,8 @@ export default function GiftAndCakeScene({
             className="cursor-pointer flex flex-col items-center mt-7 hover:scale-105 transition-transform text-center max-w-sm px-4"
           >
             <p className="text-xl md:text-2xl font-dancing text-candle-gold text-glow animate-pulse text-center">
-              Vẫn còn một điều bất ngờ nữa trong hộp... 🎁
+              Vẫn còn một điều bất ngờ nữa đó...
             </p>
-            <span className="text-xs text-white/70 font-light mt-1.5 tracking-wider text-center">
-              Kéo bức thư lên để mở đọc nhé ✨
-            </span>
           </div>
         </motion.div>
       )}

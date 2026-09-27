@@ -1,30 +1,12 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useRef, useState } from "react";
 import confetti from "canvas-confetti";
-
-gsap.registerPlugin(ScrollTrigger);
+import ScrollIndicator from "./ScrollIndicator";
 
 export default function GiftBox() {
   const sectionRef = useRef<HTMLElement>(null);
   const [isOpened, setIsOpened] = useState(false);
-  const pinRef = useRef<ScrollTrigger | null>(null);
-
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      pinRef.current = ScrollTrigger.create({
-        trigger: sectionRef.current,
-        start: "top top",
-        end: "+=100%",
-        pin: true,
-        pinSpacing: true,
-      });
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, []);
 
   const handleOpen = () => {
     if (isOpened) return;
@@ -53,19 +35,18 @@ export default function GiftBox() {
         });
       }, 300);
     }
-
-    // Auto-unpin after animation
-    setTimeout(() => {
-      pinRef.current?.kill();
-      ScrollTrigger.refresh();
-    }, 2000);
   };
 
   return (
     <section
       ref={sectionRef}
-      className="h-screen flex flex-col items-center justify-center bg-gradient-to-b from-ocean-blue to-deep-night relative overflow-hidden"
+      id="section-gift"
+      data-snap-section="true"
+      className="snap-section relative flex flex-col items-center justify-center bg-transparent overflow-hidden px-6"
     >
+      {/* Soft ambient golden glow - completely seamless */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(255,217,61,0.12)_0%,_transparent_70%)] pointer-events-none z-[1]" />
+
       {/* Golden glow behind box */}
       <div
         className={`absolute w-64 h-64 rounded-full transition-opacity duration-1000 ${
@@ -77,7 +58,7 @@ export default function GiftBox() {
 
       {/* Gift box */}
       <div
-        className="relative cursor-pointer select-none"
+        className="relative cursor-pointer select-none z-10"
         onClick={handleOpen}
         style={{ perspective: "800px" }}
       >
@@ -116,7 +97,7 @@ export default function GiftBox() {
 
       {/* Text prompt */}
       <p
-        className={`mt-8 text-xl md:text-2xl font-dancing transition-all duration-500 ${
+        className={`mt-8 text-xl md:text-2xl font-dancing transition-all duration-500 z-10 ${
           isOpened
             ? "text-candle-gold text-glow-warm"
             : "text-white/80 animate-pulse-glow"
@@ -124,6 +105,13 @@ export default function GiftBox() {
       >
         {isOpened ? "Surprise! 🎉" : "Nhấn để mở quà nhé 🎁"}
       </p>
+
+      {/* Next step indicator */}
+      <div className="z-10">
+        <ScrollIndicator
+          text={isOpened ? "Cắt bánh sinh nhật nào 🎂" : "Cuộn tiếp nhé ↓"}
+        />
+      </div>
     </section>
   );
 }

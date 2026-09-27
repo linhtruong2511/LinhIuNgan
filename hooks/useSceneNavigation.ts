@@ -24,6 +24,7 @@ export function useSceneNavigation() {
   const [isPuzzleOpen, setIsPuzzleOpen] = useState(false);
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
   const historyRef = useRef<{ scene: SceneId; subStep: number }[]>([]);
+  const lastNavTimeRef = useRef<number>(0);
 
   // Push history before navigating
   const pushHistory = useCallback((scene: SceneId, subStep: number) => {
@@ -32,6 +33,9 @@ export function useSceneNavigation() {
 
   const nextScene = useCallback(() => {
     if (!canAdvance || isPuzzleOpen || isLightboxOpen) return;
+    const now = Date.now();
+    if (now - lastNavTimeRef.current < 850) return;
+    lastNavTimeRef.current = now;
 
     if (currentScene === "intro") {
       pushHistory("intro", 0);
@@ -57,6 +61,9 @@ export function useSceneNavigation() {
 
   const prevScene = useCallback(() => {
     if (isPuzzleOpen || isLightboxOpen) return;
+    const now = Date.now();
+    if (now - lastNavTimeRef.current < 850) return;
+    lastNavTimeRef.current = now;
     const prev = historyRef.current.pop();
     if (prev) {
       setCurrentScene(prev.scene);
@@ -64,6 +71,13 @@ export function useSceneNavigation() {
       setCanAdvance(true);
     }
   }, [isPuzzleOpen, isLightboxOpen]);
+
+  const advanceToMemories = useCallback(() => {
+    pushHistory("gift_and_cake", 0);
+    setCurrentScene("floating_memories");
+    setSubStep(0);
+    setCanAdvance(false);
+  }, [pushHistory]);
 
   const goToFinale = useCallback(() => {
     pushHistory(currentScene, subStep);
@@ -142,6 +156,7 @@ export function useSceneNavigation() {
     isLightboxOpen,
     setIsLightboxOpen,
     nextScene,
+    advanceToMemories,
     prevScene,
     goToFinale,
     restartToBeginning,

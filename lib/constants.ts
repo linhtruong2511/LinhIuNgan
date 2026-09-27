@@ -8,32 +8,30 @@ export const BIRTHDAY_CONFIG = {
   name: "Bạn nhỏ",
 
   sweetWords: [
-    "Có những ngày, chỉ cần nghĩ đến em thôi là đủ vui rồi...",
-    "Em là điều tuyệt vời nhất mà anh từng có...",
-    "Sinh nhật em, anh muốn tặng em cả thế giới...",
-    "Nhưng trước hết, mở quà anh đã nào! 🎁",
+    "Cảm ơn em vì đã luôn ở bên cạnh anh...",
+    "Hôm nay là một ngày thật đặc biệt, ngày dành riêng cho em...",
+    "Anh muốn mang lại những điều tuyệt vời nhất cho em...",
+    "Đoán xem hôm nay anh có bất ngờ gì cho em nè!"
   ],
 
-  letterContent: `Gửi Bạn nhỏ yêu dấu,
+  letterContent: `Gửi Bạn nhỏ của anh,
 
-Hôm nay là ngày đặc biệt nhất trong năm — ngày em được sinh ra trên đời này. Và anh thật may mắn vì được ở bên em, được yêu em, được cùng em đi qua bao nhiêu kỷ niệm đẹp.
+Hôm nay là ngày đặc biệt nhất trong năm — ngày mà người anh yêu xuất hiện trên cuộc đời này. Tiếc là sinh nhật năm nay anh không thể ở ngay cạnh để thổi nến và ôm em một cái thật chặt, nhưng mọi suy nghĩ của anh hôm nay đều hướng về nơi em.
 
-Em biết không, mỗi ngày bên em đều là một ngày tuyệt vời. Nụ cười của em, giọng nói của em, cả những lúc em giận dỗi nữa — tất cả đều khiến anh yêu em nhiều hơn.
+Ơ nơi đó chắc chắn có những lúc mệt mỏi và cô đơn, nhưng em đã luôn mạnh mẽ và làm rất tốt rồi. Anh tự hào về em nhiều lắm. Dù hai đứa đang ở hai nơi khác nhau, khoảng cách chỉ là địa lý thôi, còn góc nhỏ bình yên nhất trong lòng anh thì lúc nào cũng dành trọn cho em.
 
-Anh không giỏi nói những lời hoa mỹ, nhưng anh muốn em biết rằng: em là người quan trọng nhất trong cuộc đời anh. Anh sẽ luôn ở đây, bên em, dù bất cứ điều gì xảy ra.
+Chúc Bạn nhỏ sinh nhật thật nhiều niềm vui và luôn bình an. Mong em chăm sóc bản thân thật tốt, ăn uống đầy đủ, và hãy nhớ rằng dù ở đâu, anh vẫn luôn đứng phía sau ủng hộ và chờ ngày gặp lại em.
 
-Chúc em sinh nhật thật vui, thật hạnh phúc. Mong em luôn khỏe mạnh, luôn xinh đẹp, và luôn là em — người mà anh yêu nhất.
-
-Yêu em nhiều lắm ❤️`,
+Thương và nhớ em rất nhiều ❤️`,
 
   memories: [
-    { src: "/images/photo1.jpg", type: "image" as const, caption: "Lần đầu tiên chúng mình gặp nhau..." },
-    { src: "/images/photo2.jpg", type: "image" as const, caption: "Chuyến đi đáng nhớ nhất của mình" },
-    { src: "/images/photo3.jpg", type: "image" as const, caption: "Khoảnh khắc anh yêu nhất" },
-    { src: "/videos/video1.mp4", type: "video" as const, caption: "Video kỷ niệm của chúng mình" },
-    { src: "/images/photo4.jpg", type: "image" as const, caption: "Ngày sinh nhật năm ngoái" },
-    { src: "/images/photo5.jpg", type: "image" as const, caption: "Em luôn đẹp nhất khi cười" },
-    { src: "/images/photo6.jpg", type: "image" as const, caption: "Yêu em nhiều lắm ❤️" },
+    { src: "/images/photo9.jpg", type: "image" as const, caption: "Chũng mình đi chụp photobooth" },
+    { src: "/images/photo2.jpg", type: "image" as const, caption: "Bức ảnh em khoe anh hôm chúng mình cùng về tranh thủ" },
+    { src: "/images/photo3.jpg", type: "image" as const, caption: "Hôm chúng mình đi chơi nè" },
+    { src: "/images/photo11.jpg", type: "image" as const, caption: "Chúng mình chuẩn bị về hè" },
+    { src: "/images/photo24.jpg", type: "image" as const, caption: "Trông iu quá cơ :>" },
+    { src: "/images/photo5.jpg", type: "image" as const, caption: "Bức này là hôm em đang đi làm giấy tờ, chúng mình chuẩn bị yêu xa" },
+    { src: "/images/photo7.jpg", type: "image" as const, caption: "Bạn nhỏ của anh cute quá zọ ❤️" },
   ],
 
   // Secret Puzzle & Finale Config

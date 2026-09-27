@@ -1,11 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { BIRTHDAY_CONFIG } from "@/lib/constants";
-
-gsap.registerPlugin(ScrollTrigger);
+import ScrollIndicator from "./ScrollIndicator";
 
 type LetterState = "envelope" | "opening" | "reading";
 
@@ -13,25 +10,10 @@ export default function LoveLetter() {
   const sectionRef = useRef<HTMLElement>(null);
   const [state, setState] = useState<LetterState>("envelope");
   const [visibleLines, setVisibleLines] = useState(0);
-  const pinRef = useRef<ScrollTrigger | null>(null);
 
   const letterLines = BIRTHDAY_CONFIG.letterContent
     .split("\n")
     .filter((line) => line.trim() !== "");
-
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      pinRef.current = ScrollTrigger.create({
-        trigger: sectionRef.current,
-        start: "top top",
-        end: "+=200%",
-        pin: true,
-        pinSpacing: true,
-      });
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, []);
 
   useEffect(() => {
     if (state !== "reading") return;
@@ -44,7 +26,7 @@ export default function LoveLetter() {
       if (lineIndex >= letterLines.length) {
         clearInterval(interval);
       }
-    }, 400);
+    }, 350);
 
     return () => clearInterval(interval);
   }, [state, letterLines.length]);
@@ -56,23 +38,23 @@ export default function LoveLetter() {
     // After envelope open animation, show letter
     setTimeout(() => {
       setState("reading");
-    }, 1200);
-  };
-
-  const handleFinishReading = () => {
-    pinRef.current?.kill();
-    ScrollTrigger.refresh();
+    }, 1000);
   };
 
   return (
     <section
       ref={sectionRef}
-      className="h-screen flex flex-col items-center justify-center bg-gradient-to-b from-rose-red/10 via-deep-night to-ocean-blue/30 relative overflow-hidden px-6"
+      id="section-letter"
+      data-snap-section="true"
+      className="snap-section relative flex flex-col items-center justify-center bg-transparent overflow-hidden px-6"
     >
+      {/* Soft ambient romantic rose glow - completely seamless */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(230,57,70,0.12)_0%,_transparent_70%)] pointer-events-none z-[1]" />
+
       {/* Envelope */}
       {state !== "reading" && (
         <div
-          className="relative cursor-pointer select-none"
+          className="relative cursor-pointer select-none z-10"
           onClick={handleOpenEnvelope}
         >
           {/* Envelope body */}
@@ -115,19 +97,25 @@ export default function LoveLetter() {
 
       {/* Letter content */}
       {state === "reading" && (
-        <div className="w-full max-w-lg mx-auto animate-fade-in">
-          <div
-            className="bg-paper-cream rounded-lg p-6 md:p-8 shadow-2xl max-h-[70vh] overflow-y-auto"
-            style={{
-              backgroundImage:
-                "repeating-linear-gradient(transparent, transparent 27px, #e8d5b7 28px)",
-            }}
-          >
-            {letterLines.map((line, i) => (
+        <div className="relative z-10 w-full max-w-lg bg-paper-cream/95 text-gray-800 rounded-xl p-6 md:p-8 shadow-2xl backdrop-blur-sm border border-amber-200/50 animate-fade-in max-h-[68vh] overflow-y-auto">
+          {/* Paper texture overlay */}
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-amber-100/30 rounded-xl pointer-events-none" />
+
+          {/* Heart watermark */}
+          <div className="absolute top-4 right-4 text-rose-red/20 text-4xl select-none">
+            ❤️
+          </div>
+
+          <div className="relative z-10 space-y-4">
+            {letterLines.slice(0, visibleLines).map((line, i) => (
               <p
                 key={i}
-                className={`text-gray-700 font-vibes text-lg md:text-xl leading-[28px] mb-0 transition-opacity duration-500 ${
-                  i < visibleLines ? "opacity-100" : "opacity-0"
+                className={`leading-relaxed transition-opacity duration-300 ${
+                  i === 0
+                    ? "font-vibes text-2xl md:text-3xl text-rose-red mb-4"
+                    : i === letterLines.length - 1
+                    ? "font-vibes text-xl md:text-2xl text-rose-red text-right mt-6"
+                    : "font-sans text-sm md:text-base text-gray-700 font-light"
                 }`}
               >
                 {line}
@@ -135,26 +123,32 @@ export default function LoveLetter() {
             ))}
           </div>
 
-          {/* Finish reading button */}
-          {visibleLines >= letterLines.length && (
-            <button
-              onClick={handleFinishReading}
-              className="mt-6 mx-auto block px-8 py-3 bg-rose-red text-white font-dancing text-xl
-                rounded-full shadow-lg hover:bg-coral transition-colors duration-300
-                animate-pulse-glow"
-            >
-              Đã đọc xong ❤️
-            </button>
+          {/* Blinking quill indicator while writing */}
+          {visibleLines < letterLines.length && (
+            <span className="inline-block animate-pulse text-rose-red ml-1">
+              ✏️
+            </span>
           )}
         </div>
       )}
 
-      {/* Prompt text */}
+      {/* Prompt */}
       {state === "envelope" && (
-        <p className="mt-6 text-xl md:text-2xl font-dancing text-white/80 animate-pulse-glow">
-          Có thư cho bạn nè 💌
+        <p className="mt-8 text-xl font-dancing text-white/80 animate-pulse-glow z-10">
+          Chạm để mở thư nhé 💌
         </p>
       )}
+
+      {/* Next step indicator */}
+      <div className="z-10">
+        <ScrollIndicator
+          text={
+            state === "reading" && visibleLines >= letterLines.length
+              ? "Xem lại kỷ niệm của chúng mình 📸"
+              : "Cuộn tiếp nhé ↓"
+          }
+        />
+      </div>
     </section>
   );
 }

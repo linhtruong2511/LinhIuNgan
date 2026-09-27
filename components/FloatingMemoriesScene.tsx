@@ -83,31 +83,36 @@ export default function FloatingMemoriesScene({
             initial={{ x: 0, y: 0, scale: 0.1, opacity: 0, rotate: 0 }}
             animate={{
               x: dest.x,
-              y: [dest.y, `calc(${dest.y} + 8px)`, dest.y],
+              y: dest.y,
               scale: 1,
               opacity: 1,
               rotate: dest.rotate,
             }}
             transition={{
-              x: { duration: 1.2, delay: 0.28 * i, ease: [0.22, 1, 0.36, 1] },
-              scale: { duration: 1.2, delay: 0.28 * i, ease: [0.22, 1, 0.36, 1] },
-              opacity: { duration: 0.8, delay: 0.28 * i },
-              rotate: { duration: 1.2, delay: 0.28 * i },
-              y: {
-                duration: 3 + (i % 3),
-                repeat: Infinity,
-                ease: "easeInOut",
-                delay: 1.2 + 0.28 * i,
-              },
+              duration: 1.6,
+              delay: 0.25 * i,
+              ease: [0.25, 0.1, 0.25, 1],
             }}
-            whileHover={{ scale: 1.15, zIndex: 40 }}
             className="absolute z-20 cursor-pointer select-none"
             onClick={(e) => {
               e.stopPropagation();
               onOpenLightbox(i);
             }}
           >
-            <div className="bg-white p-1.5 pb-5 rounded shadow-2xl w-24 h-24 md:w-32 md:h-32 border border-white/80">
+            <motion.div
+              animate={{
+                y: [-7, 7, -7],
+                rotate: [-1.2, 1.2, -1.2],
+              }}
+              transition={{
+                duration: 4.2 + (i % 4) * 0.7,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: 1.4 + 0.25 * i,
+              }}
+              whileHover={{ scale: 1.15, zIndex: 40 }}
+              className="bg-white p-1.5 pb-5 rounded shadow-2xl w-24 h-24 md:w-32 md:h-32 border border-white/80"
+            >
               <div className="relative w-full h-full overflow-hidden rounded-sm bg-gray-800">
                 {memory.type === "image" ? (
                   !failedImages[i] ? (
@@ -133,7 +138,7 @@ export default function FloatingMemoriesScene({
               <p className="absolute bottom-1 left-0 right-0 text-center text-[9px] md:text-[11px] font-vibes text-gray-700 px-1 truncate">
                 {memory.caption}
               </p>
-            </div>
+            </motion.div>
           </motion.div>
         );
       })}

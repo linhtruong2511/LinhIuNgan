@@ -33,7 +33,7 @@ export default function IntroScene() {
           }}
           className="text-4xl sm:text-6xl md:text-7xl font-dancing text-white text-glow"
         >
-          Xin chào
+          Chin chào 
         </motion.h1>
 
         <motion.h2
@@ -48,7 +48,7 @@ export default function IntroScene() {
           }}
           className="text-2xl sm:text-4xl md:text-6xl font-dancing text-teal-accent text-glow"
         >
-          {BIRTHDAY_CONFIG.name} iu dấu của anh ❤️
+          {BIRTHDAY_CONFIG.name} iu dấu của anh he ❤️
         </motion.h2>
 
         <motion.p
@@ -58,7 +58,7 @@ export default function IntroScene() {
           }}
           className="text-sm md:text-base text-white/70 font-light pt-4"
         >
-          Một điều bất ngờ dành riêng cho em trong ngày hôm nay... ✨
+          Hôm nay anh có 1 điều bất ngờ dành cho em nè... ✨
         </motion.p>
       </motion.div>
     </div>

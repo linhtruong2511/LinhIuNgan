@@ -2,7 +2,6 @@
 
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
-import { BIRTHDAY_CONFIG } from "@/lib/constants";
 import ScrollIndicator from "./ScrollIndicator";
 
 export default function IntroSplash() {
@@ -13,75 +12,77 @@ export default function IntroSplash() {
   const indicatorRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const tl = gsap.timeline({ delay: 0.5 });
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline({ delay: 0.2 });
 
-    tl.fromTo(
-      titleRef.current,
-      { opacity: 0, scale: 0.5, y: 30 },
-      { opacity: 1, scale: 1, y: 0, duration: 1.2, ease: "back.out(1.7)" }
-    )
-      .fromTo(
-        nameRef.current,
-        { opacity: 0, letterSpacing: "0.5em", y: 20 },
-        {
-          opacity: 1,
-          letterSpacing: "0.15em",
-          y: 0,
-          duration: 1,
-          ease: "power2.out",
-        },
-        "-=0.3"
+      tl.fromTo(
+        titleRef.current,
+        { opacity: 0, scale: 0.5, y: 30 },
+        { opacity: 1, scale: 1, y: 0, duration: 1.2, ease: "back.out(1.7)" }
       )
-      .fromTo(
-        subtitleRef.current,
-        { opacity: 0, y: 20 },
-        { opacity: 0.7, y: 0, duration: 0.8, ease: "power2.out" },
-        "-=0.3"
-      )
-      .fromTo(
-        indicatorRef.current,
-        { opacity: 0 },
-        { opacity: 1, duration: 0.5 },
-        "-=0.2"
-      );
+        .fromTo(
+          nameRef.current,
+          { opacity: 0, scale: 0.9, y: 20 },
+          {
+            opacity: 1,
+            scale: 1,
+            y: 0,
+            duration: 1,
+            ease: "power2.out",
+          },
+          "-=0.3"
+        )
+        .fromTo(
+          subtitleRef.current,
+          { opacity: 0, y: 20 },
+          { opacity: 0.7, y: 0, duration: 0.8, ease: "power2.out" },
+          "-=0.3"
+        )
+        .fromTo(
+          indicatorRef.current,
+          { opacity: 0 },
+          { opacity: 1, duration: 0.5 },
+          "-=0.2"
+        );
+    }, sectionRef);
 
-    return () => {
-      tl.kill();
-    };
+    return () => ctx.revert();
   }, []);
 
   return (
     <section
       ref={sectionRef}
-      className="relative h-screen flex flex-col items-center justify-center overflow-hidden"
+      id="section-intro"
+      data-snap-section="true"
+      className="snap-section relative flex flex-col items-center justify-center overflow-hidden bg-transparent"
     >
-      {/* Gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-deep-night via-deep-night to-ocean-blue z-[1]" />
+      {/* Soft ambient radial glow - seamless with dark sky, starry particles shine through */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(30,58,95,0.45)_0%,_transparent_70%)] pointer-events-none z-[1]" />
 
       {/* Content */}
       <div className="relative z-10 text-center px-6">
         <h1
           ref={titleRef}
-          className="text-5xl md:text-7xl font-dancing text-white text-glow opacity-0 mb-4"
+          className="text-4xl sm:text-5xl md:text-7xl font-dancing text-white text-glow opacity-0 mb-4"
         >
-          Happy Birthday
+          Hellu
         </h1>
         <h2
           ref={nameRef}
-          className="text-4xl md:text-6xl font-dancing text-teal-accent text-glow opacity-0 mt-2"
+          className="text-2xl sm:text-4xl md:text-6xl font-dancing text-teal-accent text-glow opacity-0 mt-2"
         >
-          {BIRTHDAY_CONFIG.name}
+          bạn nhỏ iu dấu của anh ❤️
         </h2>
         <p
           ref={subtitleRef}
-          className="text-base md:text-lg text-white/60 mt-8 font-light opacity-0"
+          className="text-base md:text-lg text-white/70 mt-8 font-light opacity-0"
         >
           Cuộn xuống để khám phá điều bất ngờ nhé ✨
         </p>
       </div>
 
       <div ref={indicatorRef} className="opacity-0 z-10">
-        <ScrollIndicator />
+        <ScrollIndicator text="Cuộn xuống nhé" />
       </div>
     </section>
   );
