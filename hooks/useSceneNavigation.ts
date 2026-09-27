@@ -34,7 +34,7 @@ export function useSceneNavigation() {
   const nextScene = useCallback(() => {
     if (!canAdvance || isPuzzleOpen || isLightboxOpen) return;
     const now = Date.now();
-    if (now - lastNavTimeRef.current < 1400) return;
+    if (now - lastNavTimeRef.current < 1200) return;
     lastNavTimeRef.current = now;
 
     if (currentScene === "intro") {
@@ -62,7 +62,7 @@ export function useSceneNavigation() {
   const prevScene = useCallback(() => {
     if (isPuzzleOpen || isLightboxOpen) return;
     const now = Date.now();
-    if (now - lastNavTimeRef.current < 1400) return;
+    if (now - lastNavTimeRef.current < 1200) return;
     lastNavTimeRef.current = now;
     const prev = historyRef.current.pop();
     if (prev) {

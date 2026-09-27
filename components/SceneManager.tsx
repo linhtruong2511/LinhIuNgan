@@ -76,14 +76,14 @@ export default function SceneManager() {
       />
 
       {/* Main Scene Transitions */}
-      <AnimatePresence mode="wait">
+      <AnimatePresence initial={false}>
         <motion.div
           key={`${currentScene}-${currentScene === "sweet_words" ? subStep : ""}`}
-          initial={{ opacity: 0, x: 90, filter: "blur(4px)" }}
+          initial={{ opacity: 0, x: 160, filter: "blur(4px)" }}
           animate={{ opacity: 1, x: 0, filter: "blur(0px)" }}
-          exit={{ opacity: 0, x: -90, filter: "blur(4px)" }}
-          transition={{ duration: 1.3, ease: [0.22, 1, 0.36, 1] }}
-          className="w-full h-full"
+          exit={{ opacity: 0, x: -160, filter: "blur(4px)", pointerEvents: "none" }}
+          transition={{ duration: 1.6, ease: [0.16, 1, 0.3, 1] }}
+          className="absolute inset-0 w-full h-full"
         >
           {currentScene === "intro" && <IntroScene />}
           {currentScene === "sweet_words" && (
