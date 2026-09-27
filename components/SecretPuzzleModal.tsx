@@ -6,7 +6,7 @@ import confetti from "canvas-confetti";
 import { BIRTHDAY_CONFIG } from "@/lib/constants";
 
 interface SecretPuzzleModalProps {
-  isOpen: boolean;
+  isOpen?: boolean;
   onClose: () => void;
   onSuccess: () => void;
 }
@@ -78,14 +78,19 @@ export default function SecretPuzzleModal({
   };
 
   return (
-    <div
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.3 }}
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md px-4"
       onClick={onClose}
     >
       <motion.div
-        initial={{ scale: 0.9, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        exit={{ scale: 0.9, opacity: 0 }}
+        initial={{ scale: 0.9, opacity: 0, y: 10 }}
+        animate={{ scale: 1, opacity: 1, y: 0 }}
+        exit={{ scale: 0.9, opacity: 0, y: 10 }}
+        transition={{ duration: 0.25 }}
         onClick={(e) => e.stopPropagation()}
         className="relative w-full max-w-sm bg-deep-night/95 border border-white/20 rounded-2xl p-6 shadow-2xl flex flex-col items-center text-center select-none"
       >
@@ -317,6 +322,6 @@ export default function SecretPuzzleModal({
           </div>
         )}
       </motion.div>
-    </div>
+    </motion.div>
   );
 }

@@ -108,15 +108,13 @@ export default function SceneManager() {
       </AnimatePresence>
 
       {/* Secret Puzzle Modal */}
-      <AnimatePresence>
-        {isPuzzleOpen && (
-          <SecretPuzzleModal
-            isOpen={isPuzzleOpen}
-            onClose={() => setIsPuzzleOpen(false)}
-            onSuccess={handlePuzzleSuccess}
-          />
-        )}
-      </AnimatePresence>
+      {isPuzzleOpen && (
+        <SecretPuzzleModal
+          isOpen={isPuzzleOpen}
+          onClose={() => setIsPuzzleOpen(false)}
+          onSuccess={handlePuzzleSuccess}
+        />
+      )}
 
       {/* Lightbox for Memories */}
       {lightboxIndex !== null && (

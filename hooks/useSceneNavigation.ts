@@ -84,6 +84,8 @@ export function useSceneNavigation() {
     setCurrentScene("finale_flower");
     setSubStep(0);
     setCanAdvance(false);
+    setIsPuzzleOpen(false);
+    setIsLightboxOpen(false);
   }, [currentScene, subStep, pushHistory]);
 
   const restartToBeginning = useCallback(() => {

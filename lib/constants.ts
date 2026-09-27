@@ -39,9 +39,9 @@ Thương và nhớ em rất nhiều ❤️`,
   secretPinHint: "Gợi ý: Ngày chúng mình chính thức yêu nhau",
   puzzleInstruction: "Kéo từng mảnh ghép vào đúng vị trí nhé ✨",
   finaleFlower: {
-    badge: "Special Birthday Wish",
-    title: "Happy Birthday, Bạn nhỏ của anh! 💖",
-    subtitle: "Chúc cho mọi ước mơ của em đều nở rộ rực rỡ như đóa hoa này ✨",
-    closing: "Yêu em nhiều hơn mỗi ngày ❤️",
+    badge: "",
+    title: "💖 Happy Birthday bạn nhỏ 💖",
+    subtitle: "Chúc cho mọi ước mơ của em đều nở rộ, rực rỡ như đóa hoa này nhé ✨",
+    closing: "Anh yêu em nhiều lắm❤️",
   },
 } as const;

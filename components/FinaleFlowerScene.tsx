@@ -56,7 +56,7 @@ export default function FinaleFlowerScene({ onRestart }: FinaleFlowerSceneProps)
   const corePetals = Array.from({ length: 6 }, (_, i) => i * 60 + 15);
 
   return (
-    <div className="relative w-full h-full flex flex-col items-center justify-center text-center px-4 overflow-hidden select-none bg-[#050B14]">
+    <div className="relative z-10 w-full h-full flex flex-col items-center justify-center text-center px-4 overflow-hidden select-none bg-[#050B14]">
       {/* Dim, intimate romantic atmosphere */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(255,107,107,0.12)_0%,_rgba(10,22,40,0.85)_50%,_#050B14_100%)] pointer-events-none" />
 
@@ -284,7 +284,7 @@ export default function FinaleFlowerScene({ onRestart }: FinaleFlowerSceneProps)
                 initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1, delay: 0.4 }}
-                className="text-2xl md:text-4xl font-dancing text-white text-glow-warm leading-tight"
+                className="text-xl md:text-4xl font-dancing text-white text-glow-warm leading-tight"
               >
                 {title}
               </motion.h2>
