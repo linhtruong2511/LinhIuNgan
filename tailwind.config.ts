@@ -18,9 +18,9 @@ const config: Config = {
         "paper-cream": "#FFF8E7",
       },
       fontFamily: {
-        dancing: ["Dancing Script", "cursive"],
-        vibes: ["Great Vibes", "cursive"],
-        sans: ["Inter", "sans-serif"],
+        dancing: ["var(--font-dancing)", "Dancing Script", "cursive"],
+        vibes: ["var(--font-vibes)", "Great Vibes", "cursive"],
+        sans: ["var(--font-inter)", "Inter", "sans-serif"],
       },
       animation: {
         "bounce-slow": "bounce 2s infinite",
