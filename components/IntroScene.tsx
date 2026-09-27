@@ -23,12 +23,12 @@ export default function IntroScene() {
       >
         <motion.h1
           variants={{
-            hidden: { opacity: 0, x: 50, filter: "blur(6px)" },
+            hidden: { opacity: 0, x: 40, filter: "blur(4px)" },
             visible: {
               opacity: 1,
               x: 0,
               filter: "blur(0px)",
-              transition: { duration: 1.2, ease: [0.22, 1, 0.36, 1] },
+              transition: { duration: 1.8, ease: [0.25, 0.1, 0.25, 1] },
             },
           }}
           className="text-4xl sm:text-6xl md:text-7xl font-dancing text-white text-glow"
@@ -38,12 +38,12 @@ export default function IntroScene() {
 
         <motion.h2
           variants={{
-            hidden: { opacity: 0, x: 50, filter: "blur(6px)" },
+            hidden: { opacity: 0, x: 40, filter: "blur(4px)" },
             visible: {
               opacity: 1,
               x: 0,
               filter: "blur(0px)",
-              transition: { duration: 1.2, ease: [0.22, 1, 0.36, 1] },
+              transition: { duration: 1.8, ease: [0.25, 0.1, 0.25, 1] },
             },
           }}
           className="text-2xl sm:text-4xl md:text-6xl font-dancing text-teal-accent text-glow"
@@ -53,11 +53,11 @@ export default function IntroScene() {
 
         <motion.p
           variants={{
-            hidden: { opacity: 0, x: 30 },
+            hidden: { opacity: 0, x: 25 },
             visible: {
               opacity: 0.8,
               x: 0,
-              transition: { duration: 1.0, ease: "easeOut" },
+              transition: { duration: 1.5, ease: [0.25, 0.1, 0.25, 1] },
             },
           }}
           className="text-sm md:text-base text-white/70 font-light pt-4"

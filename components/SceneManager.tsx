@@ -79,10 +79,10 @@ export default function SceneManager() {
       <AnimatePresence initial={false}>
         <motion.div
           key={`${currentScene}-${currentScene === "sweet_words" ? subStep : ""}`}
-          initial={{ opacity: 0, x: 160, filter: "blur(4px)" }}
+          initial={{ opacity: 0, x: 100, filter: "blur(3px)" }}
           animate={{ opacity: 1, x: 0, filter: "blur(0px)" }}
-          exit={{ opacity: 0, x: -160, filter: "blur(4px)", pointerEvents: "none" }}
-          transition={{ duration: 1.6, ease: [0.16, 1, 0.3, 1] }}
+          exit={{ opacity: 0, x: -100, filter: "blur(3px)", pointerEvents: "none" }}
+          transition={{ duration: 2.4, ease: [0.25, 0.1, 0.25, 1] }}
           className="absolute inset-0 w-full h-full"
         >
           {currentScene === "intro" && <IntroScene />}
