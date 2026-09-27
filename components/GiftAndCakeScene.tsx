@@ -39,12 +39,8 @@ export default function GiftAndCakeScene({
   const cakePeekY = useTransform(lidY1, [0, -75], [48, 16]);
   const cakePeekOpacity = useTransform(lidY1, [0, -10, -50], [0, 0.7, 1]);
 
-  // Stage 4 (Letter) Lid Drag & Peek MotionValues
-  const lidY2 = useMotionValue(0);
-  const lidRotate2 = useTransform(lidY2, [0, -120], [0, -4]);
-  const lidOpacity2 = useTransform(lidY2, [-120, -220], [1, 0]);
-  const letterPeekY = useTransform(lidY2, [0, -75], [44, 14]);
-  const letterPeekOpacity = useTransform(lidY2, [0, -10, -50], [0, 0.7, 1]);
+  // Stage 4 (Letter) Draggable Letter MotionValue (no lid)
+  const letterDragY = useMotionValue(0);
 
   const letterLines = BIRTHDAY_CONFIG.letterContent
     .split("\n")
@@ -115,20 +111,18 @@ export default function GiftAndCakeScene({
       colors: ["#FFD93D", "#FF6B6B", "#4ECDC4", "#FFF0F5"],
     });
 
-    // After cake cutting celebration, bring back box for letter
+    // After cake cutting celebration, bring back open box for letter
     setTimeout(() => {
-      lidY2.set(0);
-      setIsLidOpen(false);
+      letterDragY.set(0);
       setStage("box_return");
     }, 2800);
   };
 
-  // Open Box 2: Letter emergence
+  // Open Box 2: Letter emergence (pull letter out)
   const handleOpenBox2 = () => {
-    if (stage !== "box_return" || isLidOpen) return;
+    if (stage !== "box_return") return;
 
-    setIsLidOpen(true);
-    animate(lidY2, -250, { duration: 0.65, ease: [0.16, 1, 0.3, 1] });
+    animate(letterDragY, -260, { duration: 0.55, ease: [0.16, 1, 0.3, 1] });
 
     confetti({
       particleCount: 75,
@@ -152,34 +146,24 @@ export default function GiftAndCakeScene({
           }
         }, 320);
       }, 700);
-    }, 450);
+    }, 380);
   };
 
-  const handleLid2DragEnd = (
+  const handleLetterDragEnd = (
     _e: MouseEvent | TouchEvent | PointerEvent,
     info: PanInfo
   ) => {
-    if (isLidOpen || stage !== "box_return") return;
+    if (stage !== "box_return") return;
 
-    if (info.offset.y <= -60 || info.velocity.y <= -200) {
+    if (info.offset.y <= -50 || info.velocity.y <= -180) {
       handleOpenBox2();
     } else {
-      animate(lidY2, 0, {
+      animate(letterDragY, 0, {
         type: "spring",
         stiffness: 450,
         damping: 26,
       });
     }
-  };
-
-  const handleLid2Click = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    if (isLidOpen || stage !== "box_return") return;
-    animate(lidY2, [-18, 0], {
-      type: "spring",
-      stiffness: 400,
-      damping: 20,
-    });
   };
 
   const handleLetterClick = () => {
@@ -301,12 +285,12 @@ export default function GiftAndCakeScene({
           {/* Prompt text (clickable as well) */}
           <div
             onClick={handleOpenBox1}
-            className="cursor-pointer flex flex-col items-center mt-7 hover:scale-105 transition-transform"
+            className="cursor-pointer flex flex-col items-center mt-7 hover:scale-105 transition-transform text-center max-w-sm px-4"
           >
-            <p className="text-xl md:text-2xl font-dancing text-candle-gold text-glow animate-pulse">
+            <p className="text-xl md:text-2xl font-dancing text-candle-gold text-glow animate-pulse text-center">
               Kéo nắp hộp lên nhé 🎁
             </p>
-            <span className="text-[11px] text-white/60 font-light mt-1 tracking-wider">
+            <span className="text-[11px] text-white/60 font-light mt-1 tracking-wider text-center">
               (Hoặc chạm vào đây để mở)
             </span>
           </div>
@@ -515,7 +499,7 @@ export default function GiftAndCakeScene({
       )}
 
       {/* ============================================================ */}
-      {/* 4. STAGE: BOX RETURN (CLOSED BOX WAITING FOR LETTER OPENING) */}
+      {/* 4. STAGE: BOX RETURN (OPEN BOX WITH PEEKING DRAGGABLE LETTER) */}
       {/* ============================================================ */}
       {stage === "box_return" && (
         <motion.div
@@ -524,85 +508,68 @@ export default function GiftAndCakeScene({
           transition={{ duration: 1.2, ease: [0.25, 0.1, 0.25, 1] }}
           className="relative z-20 flex flex-col items-center select-none"
         >
+          {/* GIFT BOX WITHOUT LID - LETTER PEEKS OUT DIRECTLY */}
           <div className="relative flex flex-col items-center">
-            {/* Box Lid (Draggable) */}
-            <motion.div
-              drag="y"
-              dragConstraints={{ top: -140, bottom: 0 }}
-              dragElastic={{ top: 0.25, bottom: 0 }}
-              style={{
-                y: lidY2,
-                rotate: lidRotate2,
-                opacity: lidOpacity2,
-              }}
-              onDrag={(_e, info) => {
-                lidY2.set(info.offset.y);
-              }}
-              onDragEnd={handleLid2DragEnd}
-              onClick={handleLid2Click}
-              whileHover={{ scale: 1.02 }}
-              className="relative z-30 flex flex-col items-center cursor-grab active:cursor-grabbing touch-none select-none"
-            >
-              {/* Upward Drag Arrow Cue */}
-              <motion.div
-                animate={{ y: [-1, -5, -1], opacity: [0.7, 1, 0.7] }}
-                transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
-                className="flex items-center gap-1 text-candle-gold text-xs font-medium pb-1 drop-shadow-[0_0_8px_rgba(255,217,61,0.8)] pointer-events-none"
-              >
-                <span className="text-[10px]">▲</span>
-                <span className="font-dancing tracking-wider text-xs">Kéo nắp mở nốt nhé</span>
-                <span className="text-[10px]">▲</span>
-              </motion.div>
-
-              {/* Ribbon Bow on top */}
-              <div className="relative -mb-1 flex items-center justify-center z-10">
-                <div className="w-7 h-7 rounded-full border-[3px] border-amber-300 bg-candle-gold -rotate-45 shadow-md -mr-1.5" />
-                <div className="w-7 h-7 rounded-full border-[3px] border-amber-300 bg-candle-gold rotate-45 shadow-md -ml-1.5" />
-                <div className="absolute w-4 h-4 rounded-full bg-amber-400 border border-amber-200 shadow-inner z-10" />
-              </div>
-
-              {/* Lid Cap (Fitted width: 188px on mobile, 222px on desktop) */}
-              <div className="w-[188px] h-[34px] md:w-[222px] md:h-[38px] bg-gradient-to-r from-red-600 via-rose-600 to-red-700 rounded-t-lg rounded-b-[2px] border-2 border-candle-gold/80 relative shadow-lg flex items-center justify-center">
-                <div className="w-8 h-full bg-gradient-to-r from-candle-gold via-amber-300 to-candle-gold shadow-sm" />
-                <div className="absolute h-1 w-full bottom-0 bg-candle-gold/60" />
-              </div>
-            </motion.div>
-
-            {/* Box Body Area with Centered Peeking Letter */}
-            <div className="relative w-44 md:w-52 -mt-0.5">
-              {/* Peeking Letter Container */}
-              <div className="absolute left-0 right-0 bottom-full flex justify-center pointer-events-none z-10">
+            {/* Box Body Area with Centered Draggable Letter */}
+            <div className="relative w-44 md:w-52 mt-8">
+              {/* Draggable Peeking Letter Container */}
+              <div className="absolute left-0 right-0 bottom-full flex justify-center z-10 pointer-events-auto">
                 <motion.div
-                  style={{
-                    y: letterPeekY,
-                    opacity: letterPeekOpacity,
+                  drag="y"
+                  dragConstraints={{ top: -160, bottom: 0 }}
+                  dragElastic={{ top: 0.25, bottom: 0 }}
+                  style={{ y: letterDragY }}
+                  onDrag={(_e, info) => {
+                    letterDragY.set(info.offset.y);
                   }}
-                  className="flex flex-col items-center"
+                  onDragEnd={handleLetterDragEnd}
+                  whileHover={{ scale: 1.04 }}
+                  className="flex flex-col items-center cursor-grab active:cursor-grabbing touch-none select-none -mb-3.5"
                 >
-                  <div className="w-24 md:w-28 h-8 bg-paper-cream/95 rounded-t-lg border-2 border-b-0 border-amber-300 shadow-md flex items-center justify-center px-1.5">
-                    <span className="text-[11px] font-vibes text-rose-red font-semibold whitespace-nowrap">💌 Thư gửi em</span>
+                  {/* Upward Drag Arrow Cue */}
+                  <motion.div
+                    animate={{ y: [-1, -5, -1], opacity: [0.75, 1, 0.75] }}
+                    transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
+                    className="flex items-center gap-1 text-candle-gold text-xs font-medium pb-1.5 drop-shadow-[0_0_8px_rgba(255,217,61,0.8)] pointer-events-none"
+                  >
+                    <span className="text-[10px]">▲</span>
+                    <span className="font-dancing tracking-wider text-xs">Cầm thư kéo lên nhé</span>
+                    <span className="text-[10px]">▲</span>
+                  </motion.div>
+
+                  {/* Peeking Envelope / Letter Top */}
+                  <div className="w-32 md:w-36 h-16 bg-gradient-to-b from-paper-cream via-[#FFF3DC] to-[#FFE8C2] rounded-t-2xl border-2 border-b-0 border-amber-300/90 shadow-[0_-4px_16px_rgba(255,217,61,0.25)] flex flex-col items-center justify-start pt-2 px-2 relative overflow-hidden group">
+                    <div className="w-6 h-6 rounded-full bg-rose-red text-white flex items-center justify-center text-xs shadow-md mb-0.5 animate-pulse">
+                      💌
+                    </div>
+                    <span className="text-xs font-vibes text-rose-red font-bold tracking-wider">
+                      Thư gửi em
+                    </span>
+                    <div className="absolute bottom-1 w-16 h-0.5 bg-amber-300/40 rounded-full" />
                   </div>
                 </motion.div>
               </div>
 
-              {/* Box Body */}
-              <div className="relative z-20 w-full h-36 md:h-40 bg-gradient-to-b from-rose-700 via-red-800 to-red-950 rounded-b-2xl border-2 border-t-0 border-candle-gold/60 shadow-2xl flex items-center justify-center overflow-hidden">
+              {/* Box Body (z-20 covers lower part of letter) */}
+              <div className="relative z-20 w-full h-36 md:h-40 bg-gradient-to-b from-rose-700 via-red-800 to-red-950 rounded-b-2xl border-2 border-t-2 border-candle-gold/70 shadow-2xl flex items-center justify-center overflow-hidden">
+                {/* Gold rim highlight at open top */}
+                <div className="absolute top-0 inset-x-0 h-1.5 bg-candle-gold/40 shadow-sm" />
                 <div className="absolute w-8 h-full bg-gradient-to-r from-candle-gold via-amber-300 to-candle-gold shadow-md" />
                 <div className="absolute inset-0 bg-gradient-to-b from-black/35 via-transparent to-black/25 pointer-events-none" />
               </div>
             </div>
           </div>
 
-          {/* Prompt text */}
+          {/* Prompt text (centered and cleanly wrapped) */}
           <div
             onClick={handleOpenBox2}
-            className="cursor-pointer flex flex-col items-center mt-7 hover:scale-105 transition-transform"
+            className="cursor-pointer flex flex-col items-center mt-7 hover:scale-105 transition-transform text-center max-w-sm px-4"
           >
-            <p className="text-xl md:text-2xl font-dancing text-candle-gold text-glow animate-pulse">
+            <p className="text-xl md:text-2xl font-dancing text-candle-gold text-glow animate-pulse text-center">
               Vẫn còn một điều bất ngờ nữa trong hộp... 🎁
             </p>
-            <span className="text-xs text-white/70 font-light mt-1.5 tracking-wider">
-              Kéo nắp hoặc chạm để mở nốt nhé ✨
+            <span className="text-xs text-white/70 font-light mt-1.5 tracking-wider text-center">
+              Kéo bức thư lên để mở đọc nhé ✨
             </span>
           </div>
         </motion.div>
@@ -630,7 +597,7 @@ export default function GiftAndCakeScene({
                   key={i}
                   className={`leading-relaxed ${
                     i === 0
-                      ? "font-vibes text-2xl md:text-3xl text-rose-red mb-4"
+                      ? "font-vibes text-2xl md:text-3xl text-rose-red mb-4 text-center"
                       : i === letterLines.length - 1
                       ? "font-vibes text-xl md:text-2xl text-rose-red text-right mt-6"
                       : "font-sans text-sm md:text-base text-gray-700"
