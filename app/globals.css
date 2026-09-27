@@ -6,15 +6,23 @@
 
 @layer base {
   html {
-    overflow-y: scroll;
-    overflow-x: hidden;
+    overflow: hidden !important;
     height: 100%;
+    height: 100dvh;
+    width: 100vw;
   }
 
   body {
-    @apply bg-deep-night text-white overflow-x-hidden;
+    @apply bg-deep-night text-white;
+    overflow: hidden !important;
+    height: 100%;
+    height: 100dvh;
+    width: 100vw;
+    position: fixed;
+    touch-action: manipulation;
     -webkit-tap-highlight-color: transparent;
-    min-height: 100%;
+    user-select: none;
+    -webkit-user-select: none;
   }
 
   /* Hide scrollbar for cleaner look */
@@ -27,6 +35,16 @@
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-8px); }
+  40%, 80% { transform: translateX(8px); }
+}
+
+.animate-shake {
+  animation: shake 0.4s ease-in-out;
 }
 
 @layer utilities {

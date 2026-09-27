@@ -5,7 +5,7 @@ export interface MemoryItem {
 }
 
 export const BIRTHDAY_CONFIG = {
-  name: "Linh",
+  name: "Bạn nhỏ",
 
   sweetWords: [
     "Có những ngày, chỉ cần nghĩ đến em thôi là đủ vui rồi...",
@@ -14,7 +14,7 @@ export const BIRTHDAY_CONFIG = {
     "Nhưng trước hết, mở quà anh đã nào! 🎁",
   ],
 
-  letterContent: `Gửi Linh yêu dấu,
+  letterContent: `Gửi Bạn nhỏ yêu dấu,
 
 Hôm nay là ngày đặc biệt nhất trong năm — ngày em được sinh ra trên đời này. Và anh thật may mắn vì được ở bên em, được yêu em, được cùng em đi qua bao nhiêu kỷ niệm đẹp.
 
@@ -34,6 +34,16 @@ Yêu em nhiều lắm ❤️`,
     { src: "/images/photo4.jpg", type: "image" as const, caption: "Ngày sinh nhật năm ngoái" },
     { src: "/images/photo5.jpg", type: "image" as const, caption: "Em luôn đẹp nhất khi cười" },
     { src: "/images/photo6.jpg", type: "image" as const, caption: "Yêu em nhiều lắm ❤️" },
-    { src: "/videos/video2.mp4", type: "video" as const, caption: "Những khoảnh khắc bên nhau" },
   ],
+
+  // Secret Puzzle & Finale Config
+  secretPin: "2002",
+  secretPinHint: "Gợi ý: Năm sinh của bạn nhỏ ❤️",
+  puzzleInstruction: "Chạm để gắn kết 2 mảnh tim lại với nhau nhé ✨",
+  finaleFlower: {
+    badge: "Special Birthday Wish",
+    title: "Happy Birthday, Bạn nhỏ của anh! 💖",
+    subtitle: "Chúc cho mọi ước mơ của em đều nở rộ rực rỡ như đóa hoa này ✨",
+    closing: "Yêu em nhiều hơn mỗi ngày ❤️",
+  },
 } as const;
