@@ -37,9 +37,9 @@ Yêu em nhiều lắm ❤️`,
   ],
 
   // Secret Puzzle & Finale Config
-  secretPin: "2002",
-  secretPinHint: "Gợi ý: Năm sinh của bạn nhỏ ❤️",
-  puzzleInstruction: "Chạm để gắn kết 2 mảnh tim lại với nhau nhé ✨",
+  secretPin: "3004",
+  secretPinHint: "Gợi ý: Ngày chúng mình chính thức yêu nhau",
+  puzzleInstruction: "Kéo từng mảnh ghép vào đúng vị trí nhé ✨",
   finaleFlower: {
     badge: "Special Birthday Wish",
     title: "Happy Birthday, Bạn nhỏ của anh! 💖",
