@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useSceneNavigation } from "@/hooks/useSceneNavigation";
-import BackButton from "./BackButton";
 import TapIndicator from "./TapIndicator";
 import IntroScene from "./IntroScene";
 import SweetWordsScene from "./SweetWordsScene";
@@ -25,10 +24,8 @@ export default function SceneManager() {
     isLightboxOpen,
     setIsLightboxOpen,
     nextScene,
-    prevScene,
     goToFinale,
     restartToBeginning,
-    hasHistory,
   } = useSceneNavigation();
 
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
@@ -66,12 +63,6 @@ export default function SceneManager() {
       className="relative w-full h-[100dvh] overflow-hidden select-none cursor-pointer"
       onClick={nextScene}
     >
-      {/* Back Button (top-left) */}
-      <BackButton
-        visible={hasHistory && currentScene !== "finale_flower"}
-        onClick={prevScene}
-      />
-
       {/* Tap Indicator (bottom) */}
       <TapIndicator
         text={getTapIndicatorText()}
@@ -88,10 +79,10 @@ export default function SceneManager() {
       <AnimatePresence mode="wait">
         <motion.div
           key={`${currentScene}-${currentScene === "sweet_words" ? subStep : ""}`}
-          initial={{ opacity: 0, scale: 0.97, filter: "blur(6px)" }}
-          animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
-          exit={{ opacity: 0, scale: 1.03, filter: "blur(6px)" }}
-          transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
+          initial={{ opacity: 0, x: 90, filter: "blur(4px)" }}
+          animate={{ opacity: 1, x: 0, filter: "blur(0px)" }}
+          exit={{ opacity: 0, x: -90, filter: "blur(4px)" }}
+          transition={{ duration: 1.3, ease: [0.22, 1, 0.36, 1] }}
           className="w-full h-full"
         >
           {currentScene === "intro" && <IntroScene />}
