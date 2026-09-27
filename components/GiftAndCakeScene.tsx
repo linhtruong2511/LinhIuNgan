@@ -524,7 +524,7 @@ export default function GiftAndCakeScene({
                   }}
                   onDragEnd={handleLetterDragEnd}
                   whileHover={{ scale: 1.04 }}
-                  className="flex flex-col items-center cursor-grab active:cursor-grabbing touch-none select-none -mb-3.5"
+                  className="flex flex-col items-center cursor-grab active:cursor-grabbing touch-none select-none -mb-7"
                 >
                   {/* Upward Drag Arrow Cue */}
                   <motion.div
@@ -537,15 +537,28 @@ export default function GiftAndCakeScene({
                     <span className="text-[10px]">▲</span>
                   </motion.div>
 
-                  {/* Peeking Envelope / Letter Top */}
-                  <div className="w-32 md:w-36 h-16 bg-gradient-to-b from-paper-cream via-[#FFF3DC] to-[#FFE8C2] rounded-t-2xl border-2 border-b-0 border-amber-300/90 shadow-[0_-4px_16px_rgba(255,217,61,0.25)] flex flex-col items-center justify-start pt-2 px-2 relative overflow-hidden group">
-                    <div className="w-6 h-6 rounded-full bg-rose-red text-white flex items-center justify-center text-xs shadow-md mb-0.5 animate-pulse">
-                      💌
+                  {/* Sealed Letter Envelope (Gently rounded 4 corners, horizontal ribbon band & bow) */}
+                  <div className="w-32 md:w-36 h-[76px] bg-gradient-to-b from-[#FFFDF7] via-paper-cream to-[#FFF0D4] rounded-lg border-2 border-amber-300/90 shadow-[0_-4px_16px_rgba(255,217,61,0.25)] flex flex-col items-center justify-between pt-1.5 pb-2 relative overflow-hidden">
+                    {/* Header with mini envelope */}
+                    <div className="flex items-center gap-1">
+                      <span className="text-[11px]">💌</span>
+                      <span className="text-xs font-vibes text-rose-red font-bold tracking-wider">
+                        Thư gửi em
+                      </span>
                     </div>
-                    <span className="text-xs font-vibes text-rose-red font-bold tracking-wider">
-                      Thư gửi em
-                    </span>
-                    <div className="absolute bottom-1 w-16 h-0.5 bg-amber-300/40 rounded-full" />
+
+                    {/* Horizontal ribbon band spanning across envelope with centered bow */}
+                    <div className="w-full h-3.5 bg-gradient-to-r from-amber-300 via-candle-gold to-amber-300 border-y border-amber-400/60 shadow-xs flex items-center justify-center relative">
+                      {/* Ribbon Bow tied in center */}
+                      <div className="relative flex items-center justify-center z-10">
+                        <div className="w-3.5 h-3.5 rounded-full border border-red-300 bg-rose-red -rotate-45 shadow-xs -mr-1" />
+                        <div className="w-3.5 h-3.5 rounded-full border border-red-300 bg-rose-red rotate-45 shadow-xs -ml-1" />
+                        <div className="absolute w-2 h-2 rounded-full bg-candle-gold border border-amber-200 shadow-xs z-20" />
+                      </div>
+                    </div>
+
+                    {/* Bottom subtle envelope flap fold line */}
+                    <div className="w-16 h-0.5 bg-amber-300/50 rounded-full" />
                   </div>
                 </motion.div>
               </div>
